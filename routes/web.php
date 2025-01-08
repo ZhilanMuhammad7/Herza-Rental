@@ -1,11 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProdukController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -29,11 +30,21 @@ Route::prefix('/')->group(function () {
 Route::prefix('auth')->group(function () {
     Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
     Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
-//     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
-//     Route::post('/postRegister', [AuthController::class, 'postRegister'])->name('auth.postRegister');
-//     Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('auth.postlogin');
+    //     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+    //     Route::post('/postRegister', [AuthController::class, 'postRegister'])->name('auth.postRegister');
+    //     Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('auth.postlogin');
 });
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/index', [DashboardController::class, 'index'])->name('dashboard.index');
+});
+
+
+// Produk
+Route::prefix('produk')->group(function () {
+    Route::get('/', [ProdukController::class, 'index'])->name('produk.index');
+    Route::post('/store', [ProdukController::class, 'store'])->name('produk.store');
+    Route::get('/edit/{id}', [ProdukController::class, 'edit'])->name('produk.edit');
+    Route::post('/update', [ProdukController::class, 'update'])->name('produk.update');
+    Route::delete('/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
 });
