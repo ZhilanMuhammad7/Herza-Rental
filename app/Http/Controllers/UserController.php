@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Produk;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
-class ProdukController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Produk::paginate(10);
-        return view('admin.produk.index', compact('data'));
+        $data = User::paginate(10);
+        return view('admin.user.index', compact('data'));
     }
 
     /**
@@ -29,26 +31,23 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile('foto')) {
-            $gambarPath = $request->file('foto')->store('foto_produk', 'public');
-            $gambar = $gambarPath;
-        } else {
-            $gambar = null;
-        }
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users,email',
+        ]);
 
-        $data = Produk::create([
-            'nama_mobil' => $request->nama_mobil,
-            'jenis_mobil' => $request->jenis_mobil,
-            'tahun' => $request->tahun,
-            'nomor_plat' => $request->nomor_plat,
-            'kapasitas' => $request->kapasitas,
-            'harga_sewa' => $request->harga_sewa,
-            'status' => $request->status,
-            'deskripsi' => $request->deskripsi,
-            'foto' => $gambar,
-            'kondisi' => $request->kondisi,
-            'bahan_bakar' => $request->bahan_bakar,
-            'jarak_tempuh' => $request->jarak_tempuh
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+        $data = User::create([
+            'nama' => $request->nama,
+            'no_hp' => $request->no_hp,
+            'alamat' => $request->alamat,
+            'email' => $request->email,
+            'password' => Hash::make($request->input('password')),
+            'role' => 'user'
         ]);
 
         if ($data) {
@@ -77,7 +76,7 @@ class ProdukController extends Controller
      */
     public function edit(string $id)
     {
-        $data = Produk::findOrFail($id);
+        $data = User::findOrFail($id);
         return response()->json(['data' => $data], 200);
     }
 
@@ -87,36 +86,42 @@ class ProdukController extends Controller
     public function update(Request $request)
     {
         $id = $request->id;
-        $data = Produk::find($id);
+        $data = User::find($id);
 
         if (!$data) {
             return response()->json([
                 'status' => false,
-                'message' => 'Data Produk tidak ditemukan',
+                'message' => 'Data User tidak ditemukan',
             ]);
         }
 
-        $data->update([
-            'nama_mobil' => $request->nama_mobil,
-            'jenis_mobil' => $request->jenis_mobil,
-            'tahun' => $request->tahun,
-            'nomor_plat' => $request->nomor_plat,
-            'kapasitas' => $request->kapasitas,
-            'harga_sewa' => $request->harga_sewa,
-            'status' => $request->status,
-            'deskripsi' => $request->deskripsi,
-            'kondisi' => $request->kondisi,
-            'bahan_bakar' => $request->bahan_bakar,
-            'jarak_tempuh' => $request->jarak_tempuh
+        $emailRule = 'required|email';
+        if ($request->email != $data->email) {
+            $emailRule .= '|unique:users,email';
+        }
+
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'email' => $emailRule,
         ]);
 
-        if ($request->hasFile('foto')) {
-            $gambarPath = $request->file('foto')->store('foto_produk', 'public');
-            $foto = $gambarPath;
-            $data->update([
-                'foto' => $foto
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first(),
             ]);
         }
+        if ($request->password) {
+            $data->update([
+                'password' => Hash::make($request->input('password'))
+            ]);
+        }
+        $data->update([
+            'nama' => $request->nama,
+            'no_hp' => $request->no_hp,
+            'alamat' => $request->alamat,
+            'email' => $request->email
+        ]);
 
         if ($data) {
             return response()->json([
@@ -136,7 +141,7 @@ class ProdukController extends Controller
      */
     public function destroy(string $id)
     {
-        $data = Produk::find($id);
+        $data = User::find($id);
 
         if (empty($data)) {
             return response()->json([

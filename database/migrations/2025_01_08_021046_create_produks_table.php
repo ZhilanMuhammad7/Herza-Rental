@@ -15,16 +15,16 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('nama_mobil');
             $table->string('jenis_mobil');
-            $table->string('tahun');
+            $table->integer('tahun');
             $table->string('nomor_plat');
-            $table->string('kapasitas');
-            $table->string('harga_sewa');
+            $table->integer('kapasitas');
+            $table->integer('harga_sewa');
             $table->string('status');
             $table->string('deskripsi');
             $table->string('foto');
             $table->string('kondisi');
             $table->string('bahan_bakar');
-            $table->string('jarak_tempuh');
+            $table->integer('jarak_tempuh');
             $table->timestamps();
         });
     }

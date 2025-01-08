@@ -160,7 +160,7 @@
                             <div class="app-sidebar-menu-secondary menu menu-rounded menu-column mb-6">
                                 <!--begin::Heading-->
                                 <div class="menu-item mb-2">
-                                    <div class="menu-heading text-uppercase fs-7 fw-bold">Menu</div>
+                                    <div class="menu-heading text-uppercase fs-7 fw-bold">Navigation</div>
                                     <div class="app-sidebar-separator separator"></div>
                                 </div>
 
@@ -173,7 +173,7 @@
                                     </a>
                                 </div><br>
                                 <div class="menu-item mb-2">
-                                    <div class="menu-heading text-uppercase fs-7 fw-bold">Master Data</div>
+                                    <div class="menu-heading text-uppercase fs-7 fw-bold">Menu</div>
                                     <div class="app-sidebar-separator separator"></div>
                                 </div>
                                 <div class="menu-item">
@@ -184,31 +184,31 @@
                                         <span class="menu-title">Produk</span>
                                     </a>
                                 </div>
-                                {{-- <div class="menu-item">
-                                    <a class="menu-link" href="">
+                                <div class="menu-item">
+                                    <a class="menu-link {{ request()->routeIs('user.index') ? 'active' : '' }}" href="{{ route('user.index') }}">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-gift fs-2"></i>
                                         </span>
-                                        <span class="menu-title">Data Penjadwalan</span>
+                                        <span class="menu-title">Data User</span>
                                     </a>
                                 </div>
-                                <div class="menu-item">
+                                {{-- <div class="menu-item">
                                     <a class="menu-link" href="">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-abstract-35 fs-2"></i>
                                         </span>
                                         <span class="menu-title">Data Pemesanan</span>
                                     </a>
-                                </div>
-                                <div class="menu-item">
+                                </div> --}}
+                                {{-- <div class="menu-item">
                                     <a class="menu-link" href="">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-briefcase fs-2"></i>
                                         </span>
                                         <span class="menu-title">Data Karyawan</span>
                                     </a>
-                                </div>
-                                <div class="menu-item">
+                                </div> --}}
+                                {{-- <div class="menu-item">
                                     <a class="menu-link" href="">
                                         <span class="menu-icon">
                                             <i class="fas fa-images"></i>

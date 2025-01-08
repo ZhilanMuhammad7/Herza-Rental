@@ -42,7 +42,7 @@
                             @else
                                 @foreach ($data as $item)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $loop->iteration + ($data->currentPage() - 1) * $data->perPage() }}</td>
                                         <td>{{ $item->nama_mobil }}</td>
                                         <td>{{ $item->jenis_mobil }}</td>
                                         <td>{{ $item->tahun }}</td>
@@ -87,6 +87,9 @@
                             @endif
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-start">
+                        {{ $data->links() }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -132,7 +135,7 @@
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Nomor Plat</span>
                             </label>
-                            <input type="number" class="form-control form-control-solid" placeholder="Masukkan Nomor Plat"
+                            <input type="text" class="form-control form-control-solid" placeholder="Masukkan Nomor Plat"
                                 name="nomor_plat" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
@@ -215,6 +218,8 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js')
     <script type="text/javascript">
         function resetForm() {
             $('#m_form_1_msg').hide();
