@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PesananController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -57,4 +58,13 @@ Route::prefix('user')->group(function () {
     Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::post('/update', [UserController::class, 'update'])->name('user.update');
     Route::delete('/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+});
+
+// Pesanan
+Route::prefix('pesanan')->group(function () {
+    Route::get('/', [PesananController::class, 'index'])->name('pesanan.index');
+    Route::post('/store', [PesananController::class, 'store'])->name('pesanan.store');
+    Route::get('/edit/{id}', [PesananController::class, 'edit'])->name('pesanan.edit');
+    Route::post('/update', [PesananController::class, 'update'])->name('pesanan.update');
+    Route::delete('/{id}', [PesananController::class, 'destroy'])->name('pesanan.destroy');
 });

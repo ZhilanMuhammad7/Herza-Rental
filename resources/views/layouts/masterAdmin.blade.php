@@ -165,7 +165,8 @@
                                 </div>
 
                                 <div class="menu-item">
-                                    <a class="menu-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}" href="{{ route('dashboard.index') }}">
+                                    <a class="menu-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}"
+                                        href="{{ route('dashboard.index') }}">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-home-2 fs-2"></i>
                                         </span>
@@ -177,7 +178,8 @@
                                     <div class="app-sidebar-separator separator"></div>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link {{ request()->routeIs('produk.index') ? 'active' : '' }}" href="{{ route('produk.index') }}">
+                                    <a class="menu-link {{ request()->routeIs('produk.index') ? 'active' : '' }}"
+                                        href="{{ route('produk.index') }}">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-abstract-26 fs-2"></i>
                                         </span>
@@ -185,21 +187,23 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link {{ request()->routeIs('user.index') ? 'active' : '' }}" href="{{ route('user.index') }}">
+                                    <a class="menu-link {{ request()->routeIs('pesanan.index') ? 'active' : '' }}"
+                                        href="{{ route('pesanan.index') }}">
+                                        <span class="menu-icon">
+                                            <i class="ki-outline ki-abstract-35 fs-2"></i>
+                                        </span>
+                                        <span class="menu-title">Data Pemesanan</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link {{ request()->routeIs('user.index') ? 'active' : '' }}"
+                                        href="{{ route('user.index') }}">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-gift fs-2"></i>
                                         </span>
                                         <span class="menu-title">Data User</span>
                                     </a>
                                 </div>
-                                {{-- <div class="menu-item">
-                                    <a class="menu-link" href="">
-                                        <span class="menu-icon">
-                                            <i class="ki-outline ki-abstract-35 fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">Data Pemesanan</span>
-                                    </a>
-                                </div> --}}
                                 {{-- <div class="menu-item">
                                     <a class="menu-link" href="">
                                         <span class="menu-icon">
