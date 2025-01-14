@@ -106,10 +106,10 @@
                                                 src="{{ asset('admin/assets/media/avatars/blank.png') }}" />
                                         </div>
                                         <div class="d-flex flex-column">
-                                            <div class="fw-bold d-flex align-items-center fs-5">owner
+                                            <div class="fw-bold d-flex align-items-center fs-5">{{ Auth::user()->nama }}
                                             </div>
                                             <a href="#"
-                                                class="fw-semibold text-muted text-hover-primary fs-7">owner@gmail.com</a>
+                                                class="fw-semibold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                                 <div class="separator my-2"></div>
 
                                 <div class="menu-item px-5">
-                                    <a href="{{ url('/') }}" class="menu-link px-5">Sign Out</a>
+                                    <a href="{{ url('/logout') }}" class="menu-link px-5">Logout</a>
                                 </div>
                             </div>
                         </div>

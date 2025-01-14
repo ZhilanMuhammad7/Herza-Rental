@@ -45,8 +45,8 @@
                     <li class="nav-item"><a href="{{route('landingPage.harga')}}" class="nav-link">Harga</a></li>
                     <li class="nav-item"><a href="{{route('landingPage.mobil')}}" class="nav-link">Mobil</a></li>
                     <li class="nav-item"><a href="{{route('landingPage.kontak')}}" class="nav-link">Kontak</a></li>
-                    <li class="nav-item"><a href="{{route('auth.login')}}" class="nav-link">Masuk</a></li>
-                    <li class="nav-item"><a href="{{route('auth.register')}}" class="nav-link">Daftar</a></li>
+                    <li class="nav-item"><a href="{{route('login')}}" class="nav-link">Masuk</a></li>
+                    <li class="nav-item"><a href="{{route('register')}}" class="nav-link">Daftar</a></li>
                 </ul>
             </div>
         </div>

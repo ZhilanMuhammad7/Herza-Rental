@@ -3,68 +3,68 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function postLogin(Request $request)
     {
-        //
-    }
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            if (Auth::user()->role == 'admin') {
+                return redirect('/dashboard');
+            } elseif (Auth::user()->role == 'user') {
+                return redirect()->route('login')->with('error', 'Anda tidak memiliki akses admin!');
+            } else {
+                return redirect()->route('login')->with('error', 'Email atau password salah!');
+            }
+        }
+        return redirect()->route('login')->with('error', 'Email atau password salah!');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function postRegister(Request $request)
     {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        if (User::where('email', $request->email)->exists()) {
+            return redirect()->route('register')->with('error', 'Email sudah pernah didaftarkan');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $data = new User;
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $data->nama = $request->nama;
+        $data->email = $request->email;
+        $data->password = Hash::make($request->input('password'));
+        $data->no_hp = $request->no_hp;
+        $data->alamat = $request->alamat;
+        $data->role = 'user';
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $post = $data->save();
+
+        if ($post) {
+            return redirect()->route('login')->with('success', 'Berhasil Melakukan Pendaftaran');
+        } else {
+            return redirect()->route('login')->with('error', 'Gagal Melakukan Pendaftaran');
+        }
     }
 
     public function login()
     {
+        if (auth()->user() != null) {
+            return redirect('dashboard');
+        }
         return view('auth.login');
+    }
+
+    public function logout()
+    {
+        Auth::guard('web')->logout();
+        return redirect('/login');
     }
 
     public function register()
