@@ -114,49 +114,49 @@
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Nama Mobil</span>
                             </label>
-                            <input type="text" class="form-control form-control-solid" placeholder="Masukkan Nama Mobil"
+                            <input type="text" class="form-control bg-transparent" placeholder="Masukkan Nama Mobil"
                                 name="nama_mobil" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Jenis Mobil</span>
                             </label>
-                            <input type="text" class="form-control form-control-solid" placeholder="Masukkan Jenis Mobil"
+                            <input type="text" class="form-control bg-transparent" placeholder="Masukkan Jenis Mobil"
                                 name="jenis_mobil" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Tahun</span>
                             </label>
-                            <input type="number" class="form-control form-control-solid" placeholder="Masukkan Tahun"
+                            <input type="number" class="form-control bg-transparent" placeholder="Masukkan Tahun"
                                 name="tahun" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Nomor Plat</span>
                             </label>
-                            <input type="text" class="form-control form-control-solid" placeholder="Masukkan Nomor Plat"
+                            <input type="text" class="form-control bg-transparent" placeholder="Masukkan Nomor Plat"
                                 name="nomor_plat" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Kapasitas</span>
                             </label>
-                            <input type="number" class="form-control form-control-solid"
-                                placeholder="Masukkan Kapasitas" name="kapasitas" />
+                            <input type="number" class="form-control bg-transparent" placeholder="Masukkan Kapasitas"
+                                name="kapasitas" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Harga Sewa</span>
                             </label>
-                            <input type="number" class="form-control form-control-solid" placeholder="Rp."
+                            <input type="number" class="form-control bg-transparent" placeholder="Rp."
                                 name="harga_sewa" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Status</span>
                             </label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                            <select class="form-select bg-transparent" data-control="select2" data-hide-search="true"
                                 name="status">
                                 <option value="">Pilih Status</option>
                                 <option value="Tersedia">Tersedia</option>
@@ -168,14 +168,13 @@
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Deskripsi</span>
                             </label>
-                            <textarea name="deskripsi" class="form-select form-select-solid" placeholder="Deskripsi"
-                                data-parsley-required="true"></textarea>
+                            <textarea name="deskripsi" placeholder="Deskripsi" autocomplete="off" class="form-control bg-transparent"></textarea>
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Kondisi</span>
                             </label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                            <select class="form-select bg-transparent" data-control="select2" data-hide-search="true"
                                 name="kondisi">
                                 <option value="">Pilih Kondisi</option>
                                 <option value="Baik">Baik</option>
@@ -187,7 +186,7 @@
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Bahan Bakar</span>
                             </label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                            <select class="form-select bg-transparent" data-control="select2" data-hide-search="true"
                                 name="bahan_bakar">
                                 <option value="">Pilih Bahan Bakar</option>
                                 <option value="Bensin">Bensin</option>
@@ -198,14 +197,14 @@
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Jarak Tempuh</span>
                             </label>
-                            <input type="number" class="form-control form-control-solid" placeholder="KM"
+                            <input type="number" class="form-control bg-transparent" placeholder="KM"
                                 name="jarak_tempuh" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Foto</span>
                             </label>
-                            <input type="file" class="form-control form-control-solid" name="foto" />
+                            <input type="file" class="form-control bg-transparent" name="foto" />
                         </div>
                         <div class="text-center">
                             <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>

@@ -113,7 +113,7 @@
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">Pelanggan</label>
-                            <select name="user_id" class="form-control form-control-solid" required>
+                            <select name="user_id" class="form-control bg-transparent" required>
                                 <option value="">Pilih Pelanggan</option>
                                 @foreach ($user as $value)
                                     <option value="{{ $value->id }}">{{ $value->nama }}</option>
@@ -122,7 +122,7 @@
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">Mobil</label>
-                            <select name="produk_id" class="form-control form-control-solid" required>
+                            <select name="produk_id" class="form-control bg-transparent" required>
                                 <option value="">Pilih Mobil</option>
                                 @foreach ($produk as $value)
                                     <option value="{{ $value->id }}">{{ $value->nama_mobil }}</option>
@@ -133,21 +133,21 @@
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Tanggal Mulai</span>
                             </label>
-                            <input type="date" class="form-control form-control-solid"
+                            <input type="date" class="form-control bg-transparent"
                                 placeholder="Masukkan Tanggal Mulai" name="tgl_mulai" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Tanggal Selesai</span>
                             </label>
-                            <input type="date" class="form-control form-control-solid"
+                            <input type="date" class="form-control bg-transparent"
                                 placeholder="Masukkan Tanggal Selesai" name="tgl_selesai" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Jumlah</span>
                             </label>
-                            <input type="number" class="form-control form-control-solid" placeholder="Masukkan Jumlah"
+                            <input type="number" class="form-control bg-transparent" placeholder="Masukkan Jumlah"
                                 name="jumlah" />
                         </div>
                         <div class="text-center">

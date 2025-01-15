@@ -17,7 +17,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="canonical" href="http://index.html" />
-    <link rel="shortcut icon" href="{{ asset('admin/assets/media/logos/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('admin/assets/media/logos/custom-3.png') }}" />
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -62,48 +62,57 @@
             document.documentElement.setAttribute("data-bs-theme", themeMode);
         }
     </script>
-    <!--end::Theme mode setup on page load-->
-    <!--begin::App-->
     <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
-        <!--begin::Page-->
         <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
-            <!--begin::Header-->
             <div id="kt_app_header" class="app-header">
-                <!--begin::Header container-->
                 <div class="app-container container-fluid d-flex align-items-stretch flex-stack"
                     id="kt_app_header_container">
-
                     <div class="app-navbar flex-lg-grow-1" id="kt_app_header_navbar">
                         <div class="app-navbar-item d-flex align-items-stretch flex-lg-grow-1">
-                            <!--begin::Search-->
                             <div id="kt_header_search" class="header-search d-flex align-items-center w-lg-200px"
                                 data-kt-search-keypress="true" data-kt-search-min-length="2"
                                 data-kt-search-enter="enter" data-kt-search-layout="menu"
                                 data-kt-search-responsive="true" data-kt-menu-trigger="auto"
                                 data-kt-menu-permanent="true" data-kt-menu-placement="bottom-start">
-                                <!--begin::Tablet and mobile search toggle-->
                                 <div data-kt-search-element="toggle"
                                     class="search-toggle-mobile d-flex d-lg-none align-items-center">
                                     <div class="d-flex">
                                         <i class="ki-outline ki-magnifier fs-1"></i>
                                     </div>
                                 </div>
-
+                                <form data-kt-search-element="form"
+                                    class="d-none d-lg-block w-100 position-relative mb-5 mb-lg-0" autocomplete="off">
+                                    <input type="hidden" />
+                                    <i
+                                        class="ki-outline ki-magnifier search-icon fs-2 text-gray-500 position-absolute top-50 translate-middle-y ms-5"></i>
+                                    <input type="text" class="search-input form-control form-control rounded-1 ps-13"
+                                        name="search" value="" placeholder="Search..."
+                                         />
+                                    <span
+                                        class="search-spinner position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5"
+                                        data-kt-search-element="spinner">
+                                        <span class="spinner-border h-15px w-15px align-middle text-gray-500"></span>
+                                    </span>
+                                    <span
+                                        class="search-reset btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-4"
+                                        data-kt-search-element="clear">
+                                        <i class="ki-outline ki-cross fs-2 fs-lg-1 me-0"></i>
+                                    </span>
+                                </form>
                             </div>
                         </div>
                         <div class="app-navbar-item ms-1 ms-md-3" id="kt_header_user_menu_toggle">
                             <div class="cursor-pointer symbol symbol-circle symbol-35px symbol-md-45px"
                                 data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
                                 data-kt-menu-placement="bottom-end">
-                                <img src="{{ asset('admin/assets/media/avatars/blank.png') }}" alt="user" />
+                                <img src="{{ asset('admin/assets/media/avatars/blank.png')}}" alt="user" />
                             </div>
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
                                 data-kt-menu="true">
                                 <div class="menu-item px-3">
                                     <div class="menu-content d-flex align-items-center px-3">
                                         <div class="symbol symbol-50px me-5">
-                                            <img alt="Logo"
-                                                src="{{ asset('admin/assets/media/avatars/blank.png') }}" />
+                                            <img alt="Logo" src="{{ asset('admin/assets/media/avatars/blank.png')}}" />
                                         </div>
                                         <div class="d-flex flex-column">
                                             <div class="fw-bold d-flex align-items-center fs-5">{{ Auth::user()->nama }}
@@ -113,12 +122,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu separator-->
-                                <div class="separator my-2"></div>
-
                                 <div class="menu-item px-5">
-                                    <a href="{{ url('/logout') }}" class="menu-link px-5">Logout</a>
+                                    <a href="{{ route('logout') }}"
+                                        class="menu-link px-5">Logout</a>
                                 </div>
                             </div>
                         </div>
@@ -127,14 +133,12 @@
                 </div>
             </div>
             <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
-                <!--begin::Sidebar-->
                 <div id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true"
                     data-kt-drawer-name="app-sidebar" data-kt-drawer-activate="{default: true, lg: false}"
                     data-kt-drawer-overlay="true" data-kt-drawer-width="250px" data-kt-drawer-direction="start"
                     data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
                     <div class="app-sidebar-header d-flex flex-stack d-none d-lg-flex pt-8 pb-2"
                         id="kt_app_sidebar_header">
-                        <!--begin::Logo-->
                         <a href="{{ route('dashboard.index') }}" class="app-sidebar-logo">
                             <!-- <img alt="Logo" src="{{ asset('admin/assets/media/logos/demo38.svg') }}" class="h-25px d-none d-sm-inline app-sidebar-logo-default theme-light-show" /> -->
                             <!-- <img alt="Logo" src="{{ asset('admin/assets/media/logos/demo38-dark.svg') }}" class="h-20px h-lg-25px theme-dark-show" /> -->

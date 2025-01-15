@@ -79,35 +79,35 @@
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Nama</span>
                             </label>
-                            <input type="text" class="form-control form-control-solid" placeholder="Masukkan Nama"
+                            <input type="text" class="form-control bg-transparent" placeholder="Masukkan Nama"
                                 name="nama" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Email</span>
                             </label>
-                            <input type="email" class="form-control form-control-solid" placeholder="Masukkan Email"
+                            <input type="email" class="form-control bg-transparent" placeholder="Masukkan Email"
                                 name="email" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Password</span>
                             </label>
-                            <input type="password" class="form-control form-control-solid" placeholder="Masukkan Password"
+                            <input type="password" class="form-control bg-transparent" placeholder="Masukkan Password"
                                 name="password" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">No Hp</span>
                             </label>
-                            <input type="number" class="form-control form-control-solid" placeholder="Masukkan Nomor Hp"
+                            <input type="number" class="form-control bg-transparent" placeholder="Masukkan Nomor Hp"
                                 name="no_hp" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Alamat</span>
                             </label>
-                            <textarea name="alamat" class="form-select form-select-solid" placeholder="Alamat" data-parsley-required="true"></textarea>
+                            <textarea name="alamat" placeholder="Alamat" autocomplete="off" class="form-control bg-transparent"></textarea>
                         </div>
                         <div class="text-center">
                             <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>

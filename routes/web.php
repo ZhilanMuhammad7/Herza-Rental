@@ -58,7 +58,7 @@ Route::middleware(['custom-auth'])->group(
         });
 
         //Auth
-        Route::get('/logout', [AuthController::class, 'logout']);
+        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     }
 );
 Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('postlogin');

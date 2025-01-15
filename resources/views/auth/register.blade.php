@@ -29,10 +29,11 @@ License: For each use you must have a valid license purchased only from above li
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="Metronic by Keenthemes" />
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="{{ asset('admin/assets/media/logos/custom-3.png') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <link href="{{ asset('admin/assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script></script>
 </head>
 
@@ -126,12 +127,20 @@ License: For each use you must have a valid license purchased only from above li
             <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2"
                 style="background-image: url(admin/assets/media/misc/auth-bg.png)">
                 <div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
-                    <a href="index.html" class="mb-0 mb-lg-12">
-                        <img alt="Logo" src="{{ asset('admin/assets/media/logos/custom-1.png') }}"
-                            class="h-60px h-lg-75px" />
+                    <a href="index.html" class="mb-0 mb-lg-2">
+                        <img alt="Logo" src="{{ asset('admin/assets/media/logos/custom-2.png') }}"
+                            class="h-100px h-lg-100" />
                     </a>
-                    <img class="d-none d-lg-block mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20"
-                        src="{{ asset('admin/assets/media/misc/auth-screens.png') }}" alt="" />
+                    <img class="d-none d-lg-block mx-auto w-275px w-md-40 w-xl-500px mb-2 mb-lg-20 animate__animated animate__fadeInLeft"
+                        style="--animate-duration: 1.5s; --animate-delay: 0.5s;"
+                        src="{{ asset('admin/assets/media/misc/car-2.png') }}" alt=""/>
+                    <h1 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center" style="margin-top:-50px ">
+                        Cepat, Nyaman, dan Terpercaya</h1>
+                    <div class="d-none d-lg-block text-white fs-base text-center">Temukan kemudahan perjalanan Anda
+                        bersama,
+                        <a href="#" class="opacity-75-hover text-warning fw-bold me-1">Herza Rental
+                            Mobil</a>pilihan terbaik untuk kenyamanan dan efisiensi.
+                    </div>
                 </div>
             </div>
         </div>
