@@ -67,6 +67,12 @@
             <div id="kt_app_header" class="app-header">
                 <div class="app-container container-fluid d-flex align-items-stretch flex-stack"
                     id="kt_app_header_container">
+                    <div class="d-flex align-items-center d-block d-lg-none ms-n3" title="Show sidebar menu">
+                        <div class="btn btn-icon btn-active-color-primary w-35px h-35px me-2"
+                            id="kt_app_sidebar_mobile_toggle">
+                            <i class="ki-outline ki-abstract-14 fs-2"></i>
+                        </div>
+                    </div>
                     <div class="app-navbar flex-lg-grow-1" id="kt_app_header_navbar">
                         <div class="app-navbar-item d-flex align-items-stretch flex-lg-grow-1">
                             <div id="kt_header_search" class="header-search d-flex align-items-center w-lg-200px"
@@ -86,8 +92,7 @@
                                     <i
                                         class="ki-outline ki-magnifier search-icon fs-2 text-gray-500 position-absolute top-50 translate-middle-y ms-5"></i>
                                     <input type="text" class="search-input form-control form-control rounded-1 ps-13"
-                                        name="search" value="" placeholder="Search..."
-                                         />
+                                        name="search" value="" placeholder="Search..." />
                                     <span
                                         class="search-spinner position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5"
                                         data-kt-search-element="spinner">
@@ -105,17 +110,19 @@
                             <div class="cursor-pointer symbol symbol-circle symbol-35px symbol-md-45px"
                                 data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
                                 data-kt-menu-placement="bottom-end">
-                                <img src="{{ asset('admin/assets/media/avatars/blank.png')}}" alt="user" />
+                                <img src="{{ asset('admin/assets/media/avatars/blank.png') }}" alt="user" />
                             </div>
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
                                 data-kt-menu="true">
                                 <div class="menu-item px-3">
                                     <div class="menu-content d-flex align-items-center px-3">
                                         <div class="symbol symbol-50px me-5">
-                                            <img alt="Logo" src="{{ asset('admin/assets/media/avatars/blank.png')}}" />
+                                            <img alt="Logo"
+                                                src="{{ asset('admin/assets/media/avatars/blank.png') }}" />
                                         </div>
                                         <div class="d-flex flex-column">
-                                            <div class="fw-bold d-flex align-items-center fs-5">{{ Auth::user()->nama }}
+                                            <div class="fw-bold d-flex align-items-center fs-5">
+                                                {{ Auth::user()->nama }}
                                             </div>
                                             <a href="#"
                                                 class="fw-semibold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
@@ -123,8 +130,7 @@
                                     </div>
                                 </div>
                                 <div class="menu-item px-5">
-                                    <a href="{{ route('logout') }}"
-                                        class="menu-link px-5">Logout</a>
+                                    <a href="{{ route('logout') }}" class="menu-link px-5">Logout</a>
                                 </div>
                             </div>
                         </div>

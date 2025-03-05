@@ -3,9 +3,6 @@
 <div id="kt_app_content_container" class="app-container container-fluid">
     <div class="row g-5 gx-xl-10">
         <div class="page-heading">
-            <h3>Dashboard</h3>
-        </div>
-        <div class="page-heading">
             <h1>Welcome, Owner!</h1>
         </div>
         <div class="col-xxl-6 mb-md-5 mb-xl-10">
