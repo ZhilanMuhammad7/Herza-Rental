@@ -27,6 +27,11 @@
             window.top.location.replace(window.self.location.href);
         }
     </script>
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+    </style>
 </head>
 
 <body id="kt_body" class="app-blank">
