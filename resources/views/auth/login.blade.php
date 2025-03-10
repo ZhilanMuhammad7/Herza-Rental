@@ -62,6 +62,13 @@
                         <form class="form w-100" novalidate="novalidate" action="{{ route('postlogin') }}"
                             method="POST">
                             @csrf
+                            <div class="row g-3 mb-9">
+                                <div class="col-md-6">
+                                    <a href="{{ route('landingPage.index') }}" class="btn btn-primary">
+                                        <span class="indicator-label">Back Home</span>
+                                    </a>
+                                </div>
+                            </div>
                             <div class="text-center mb-11">
                                 <h1 class="text-gray-900 fw-bolder mb-3">Login</h1>
                             </div>
