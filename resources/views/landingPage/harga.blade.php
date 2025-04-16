@@ -1,6 +1,6 @@
 @extends('layouts.masterUser')
 @section('content')
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('{{asset('ladingPage/images/bg_3.jpg')}}');" data-stellar-background-ratio="0.5">
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('{{asset('ladingPage/images/bg_2.jpg')}}');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
@@ -23,7 +23,7 @@
                                 <th>&nbsp;</th>
                                 <th>&nbsp;</th>
                                 <th class="bg-primary heading">Per Hari</th>
-                                <th class="bg-dark heading">Per Minggu</th>
+                                <!-- <th class="bg-dark heading">Per Minggu</th> -->
                                 <th class="bg-black heading">Per Bulan</th>
                             </tr>
                         </thead>
@@ -49,11 +49,11 @@
                                             <span class="num"><small class="currency">$</small> 10.99</span>
                                             <span class="per">/per hour</span>
                                         </h3>
-                                        <span class="subheading">$3/hour fuel surcharges</span>
+                                        <!-- <span class="subheading">$3/hour fuel surcharges</span> -->
                                     </div>
                                 </td>
 
-                                <td class="price">
+                                <!-- <td class="price">
                                     <p class="btn-custom"><a href="#">Pesan Rental</a></p>
                                     <div class="price-rate">
                                         <h3>
@@ -62,7 +62,7 @@
                                         </h3>
                                         <span class="subheading">$3/hour fuel surcharges</span>
                                     </div>
-                                </td>
+                                </td> -->
 
                                 <td class="price">
                                     <p class="btn-custom"><a href="#">Pesan Rental</a></p>
@@ -71,7 +71,7 @@
                                             <span class="num"><small class="currency">$</small> 995.99</span>
                                             <span class="per">/per month</span>
                                         </h3>
-                                        <span class="subheading">$3/hour fuel surcharges</span>
+                                        <!-- <span class="subheading">$3/hour fuel surcharges</span> -->
                                     </div>
                                 </td>
                             </tr><!-- END TR-->

@@ -45,6 +45,7 @@
                     <li class="nav-item"><a href="{{route('landingPage.harga')}}" class="nav-link">Harga</a></li>
                     <li class="nav-item"><a href="{{route('landingPage.mobil')}}" class="nav-link">Mobil</a></li>
                     <li class="nav-item"><a href="{{route('landingPage.kontak')}}" class="nav-link">Kontak</a></li>
+                    <li class="nav-item"><a href="{{route('landingPage.kontak')}}" class="nav-link">Profil</a></li>
                     <li class="nav-item"><a href="{{route('login')}}" class="nav-link">Masuk</a></li>
                 </ul>
             </div>
@@ -65,79 +66,6 @@
             </div>
         </div>
     </div>
-
-    <section class="ftco-section ftco-no-pt bg-light">
-        <div class="container">
-            <div class="row no-gutters">
-                <div class="col-md-12	featured-top">
-                    <div class="row no-gutters">
-                        <div class="col-md-4 d-flex align-items-center">
-                            <form action="#" class="request-form ftco-animate bg-primary">
-                                <h2>Make your trip</h2>
-                                <div class="form-group">
-                                    <label for="" class="label">Pick-up location</label>
-                                    <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="label">Drop-off location</label>
-                                    <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-                                </div>
-                                <div class="d-flex">
-                                    <div class="form-group mr-2">
-                                        <label for="" class="label">Pick-up date</label>
-                                        <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
-                                    </div>
-                                    <div class="form-group ml-2">
-                                        <label for="" class="label">Drop-off date</label>
-                                        <input type="text" class="form-control" id="book_off_date" placeholder="Date">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="label">Pick-up time</label>
-                                    <input type="text" class="form-control" id="time_pick" placeholder="Time">
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-8 d-flex align-items-center">
-                            <div class="services-wrap rounded-right w-100">
-                                <h3 class="heading-section mb-4">Cara Lebih Baik untuk Menyewa Mobil</h3>
-                                <div class="row d-flex mb-4">
-                                    <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-                                        <div class="services w-100 text-center">
-                                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
-                                            <div class="text w-100">
-                                                <h3 class="heading mb-2">Pilih Lokasi Penjemputan Anda</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-                                        <div class="services w-100 text-center">
-                                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-handshake"></span></div>
-                                            <div class="text w-100">
-                                                <h3 class="heading mb-2">Pilih Penawaran Terbaik</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-                                        <div class="services w-100 text-center">
-                                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
-                                            <div class="text w-100">
-                                                <h3 class="heading mb-2">Pesan Mobil Sewa Anda</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p> -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </section>
-
 
     <section class="ftco-section ftco-no-pt bg-light">
         <div class="container">
@@ -215,7 +143,7 @@
     <section class="ftco-section ftco-about">
         <div class="container">
             <div class="row no-gutters">
-                <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{asset('ladingPage/images/about.jpg')}}');">
+                <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{asset('ladingPage/images/logo_herza.png')}}');">
                 </div>
                 <div class="col-md-6 wrap-about ftco-animate">
                     <div class="heading-section heading-section-white pl-md-5">
@@ -252,7 +180,7 @@
                     <div class="services services-2 w-100 text-center">
                         <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-wedding-car"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">Sewa Mobil Harian dan Mingguan</h3>
+                            <h3 class="heading mb-2">Sewa Mobil Harian dan Bulanan</h3>
                             <!-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> -->
                         </div>
                     </div>
@@ -261,7 +189,7 @@
                     <div class="services services-2 w-100 text-center">
                         <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-transportation"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">Antar Kota</h3>
+                            <h3 class="heading mb-2">Antar Kota dan Provinsi</h3>
                             <!-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> -->
                         </div>
                     </div>
@@ -279,7 +207,7 @@
                     <div class="services services-2 w-100 text-center">
                         <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-transportation"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">Sewa Per Jam</h3>
+                            <h3 class="heading mb-2">Sewa Lepas Kunci</h3>
                             <!-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> -->
                         </div>
                     </div>
@@ -303,35 +231,23 @@
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4 ml-md-5">
-                        <h2 class="ftco-heading-2">Information</h2>
+                        <h2 class="ftco-heading-2">Informasi</h2>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">About</a></li>
-                            <li><a href="#" class="py-2 d-block">Services</a></li>
-                            <li><a href="#" class="py-2 d-block">Term and Conditions</a></li>
-                            <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
-                            <li><a href="#" class="py-2 d-block">Privacy &amp; Cookies Policy</a></li>
+                            <li><a href="#" class="py-2 d-block">Tentang</a></li>
+                            <li><a href="#" class="py-2 d-block">Layanan</a></li>
+                            <li><a href="#" class="py-2 d-block">Harga</a></li>
+                            <li><a href="#" class="py-2 d-block">Mobil</a></li>
+                            <li><a href="#" class="py-2 d-block">Kontak</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Customer Support</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">FAQ</a></li>
-                            <li><a href="#" class="py-2 d-block">Payment Option</a></li>
-                            <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
-                            <li><a href="#" class="py-2 d-block">How it works</a></li>
-                            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <h2 class="ftco-heading-2">Info Selengkapnya?</h2>
                         <div class="block-23 mb-3">
                             <ul>
-                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                                <li><span class="icon icon-map-marker"></span><span class="text">Jl Tiung Ujung Gang Buntu 1 No 3C</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+62 822-8484-4057</span></a></li>
                                 <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@herzarental.com</span></a></li>
                             </ul>
                         </div>

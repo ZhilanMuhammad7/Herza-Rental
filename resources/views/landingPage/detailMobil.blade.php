@@ -33,7 +33,7 @@
                             <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dashboard"></span></div>
                             <div class="text">
                                 <h3 class="heading mb-0 pl-3">
-                                    Mileage
+                                    Kilometer
                                     <span>40,000</span>
                                 </h3>
                             </div>
@@ -48,7 +48,7 @@
                             <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pistons"></span></div>
                             <div class="text">
                                 <h3 class="heading mb-0 pl-3">
-                                    Transmission
+                                    Transmisi
                                     <span>Manual</span>
                                 </h3>
                             </div>
@@ -63,23 +63,8 @@
                             <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car-seat"></span></div>
                             <div class="text">
                                 <h3 class="heading mb-0 pl-3">
-                                    Seats
+                                    Kapasitas
                                     <span>5 Adults</span>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md d-flex align-self-stretch ftco-animate">
-                <div class="media block-6 services">
-                    <div class="media-body py-md-4">
-                        <div class="d-flex mb-3 align-items-center">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-backpack"></span></div>
-                            <div class="text">
-                                <h3 class="heading mb-0 pl-3">
-                                    Luggage
-                                    <span>4 Bags</span>
                                 </h3>
                             </div>
                         </div>
@@ -93,7 +78,7 @@
                             <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-diesel"></span></div>
                             <div class="text">
                                 <h3 class="heading mb-0 pl-3">
-                                    Fuel
+                                    Bahan Bakar
                                     <span>Petrol</span>
                                 </h3>
                             </div>
@@ -125,29 +110,16 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <ul class="features">
-                                        <li class="check"><span class="ion-ios-checkmark"></span>Airconditions</li>
-                                        <li class="check"><span class="ion-ios-checkmark"></span>Child Seat</li>
+                                        <li class="check"><span class="ion-ios-checkmark"></span>AC</li>
                                         <li class="check"><span class="ion-ios-checkmark"></span>GPS</li>
-                                        <li class="check"><span class="ion-ios-checkmark"></span>Luggage</li>
-                                        <li class="check"><span class="ion-ios-checkmark"></span>Music</li>
+                                        <li class="check"><span class="ion-ios-checkmark"></span>Audio</li>
                                     </ul>
                                 </div>
                                 <div class="col-md-4">
                                     <ul class="features">
-                                        <li class="check"><span class="ion-ios-checkmark"></span>Seat Belt</li>
-                                        <li class="remove"><span class="ion-ios-close"></span>Sleeping Bed</li>
-                                        <li class="check"><span class="ion-ios-checkmark"></span>Water</li>
-                                        <li class="check"><span class="ion-ios-checkmark"></span>Bluetooth</li>
-                                        <li class="remove"><span class="ion-ios-close"></span>Onboard computer</li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-4">
-                                    <ul class="features">
-                                        <li class="check"><span class="ion-ios-checkmark"></span>Audio input</li>
-                                        <li class="check"><span class="ion-ios-checkmark"></span>Long Term Trips</li>
-                                        <li class="check"><span class="ion-ios-checkmark"></span>Car Kit</li>
-                                        <li class="check"><span class="ion-ios-checkmark"></span>Remote central locking</li>
-                                        <li class="check"><span class="ion-ios-checkmark"></span>Climate control</li>
+                                        <li class="check"><span class="ion-ios-checkmark"></span>Sabuk Pengaman</li>
+                                        <li class="check"><span class="ion-ios-checkmark"></span>Dongkrak dan Kunci Ban</li>
+                                        <li class="check"><span class="ion-ios-checkmark"></span>Remot Kunci</li>
                                     </ul>
                                 </div>
                             </div>

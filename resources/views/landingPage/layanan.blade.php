@@ -1,6 +1,6 @@
 @extends('layouts.masterUser')
 @section('content')
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('{{asset('ladingPage/images/bg_3.jpg')}}');" data-stellar-background-ratio="0.5">
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('{{asset('ladingPage/images/bg_2.jpg')}}');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
@@ -25,8 +25,8 @@
                 <div class="services services-2 w-100 text-center">
                     <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
                     <div class="text w-100">
-                        <h3 class="heading mb-2">Wedding Ceremony</h3>
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                        <h3 class="heading mb-2">Sewa Mobil Harian dan Bulanan</h3>
+                        <!-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> -->
                     </div>
                 </div>
             </div>
@@ -34,8 +34,8 @@
                 <div class="services services-2 w-100 text-center">
                     <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
                     <div class="text w-100">
-                        <h3 class="heading mb-2">City Transfer</h3>
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                        <h3 class="heading mb-2">Antar Kota dan Provinsi</h3>
+                        <!-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> -->
                     </div>
                 </div>
             </div>
@@ -43,8 +43,8 @@
                 <div class="services services-2 w-100 text-center">
                     <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
                     <div class="text w-100">
-                        <h3 class="heading mb-2">Airport Transfer</h3>
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                        <h3 class="heading mb-2">Antar Jemput Bandara</h3>
+                        <!-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> -->
                     </div>
                 </div>
             </div>
@@ -52,8 +52,8 @@
                 <div class="services services-2 w-100 text-center">
                     <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
                     <div class="text w-100">
-                        <h3 class="heading mb-2">Whole City Tour</h3>
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                        <h3 class="heading mb-2">Sewa Lepas Kunci</h3>
+                        <!-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> -->
                     </div>
                 </div>
             </div>
