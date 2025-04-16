@@ -26,10 +26,10 @@
                                 <th>Nomor Plat</th>
                                 <th>Kapasitas</th>
                                 <th>Harga Sewa</th>
-                                <th>Status</th>
                                 <th>Kondisi</th>
                                 <th>Bahan Bakar</th>
                                 <th>Jarak Tempuh</th>
+                                <th>Status</th>
                                 <th>Foto</th>
                                 <th>Aksi</th>
                             </tr>
@@ -48,15 +48,24 @@
                                         <td>{{ $item->tahun }}</td>
                                         <td>{{ $item->nomor_plat }}</td>
                                         <td>{{ $item->kapasitas }}</td>
-                                        <td>{{ $item->harga_sewa }}</td>
-                                        <td>{{ $item->status }}</td>
+                                        <td> {{ isset($item->harga_sewa) ? 'Rp ' . number_format($item->harga_sewa, 0, ',', '.') : 'Rp 0' }}
+                                        </td>
                                         <td>{{ $item->kondisi }}</td>
                                         <td>{{ $item->bahan_bakar }}</td>
-                                        <td>{{ $item->jarak_tempuh }}</td>
+                                        <td>{{ $item->jarak_tempuh }} Km</td>
+                                        <td>
+                                            @if ($item->status == 'Tersedia')
+                                                <span class="badge badge-light-primary">{{ $item->status }}</span>
+                                            @elseif($item->status == 'Disewa')
+                                                <span class="badge badge-light-danger">{{ $item->status }}</span>
+                                            @else
+                                                <span class="badge badge-light-success">{{ $item->status }}</span>
+                                            @endif
+                                        </td>
                                         <td>
                                             <span style="cursor: pointer; color: blue; text-decoration: underline;"
                                                 data-bs-toggle="modal" data-bs-target="#viewImage{{ $item->id }}">
-                                                Cek Foto
+                                                Foto
                                             </span>
                                             <div class="modal fade" id="viewImage{{ $item->id }}" tabindex="-1"
                                                 aria-labelledby="viewImageModalLabel{{ $item->id }}"
@@ -149,8 +158,8 @@
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Harga Sewa</span>
                             </label>
-                            <input type="number" class="form-control bg-transparent" placeholder="Rp."
-                                name="harga_sewa" />
+                            <input type="text" class="form-control bg-transparent" placeholder="Rp" name="harga_sewa"
+                                oninput="formatRupiah(this)" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
@@ -294,7 +303,7 @@
                         $('[name="tahun"]').val(data.data.tahun);
                         $('[name="nomor_plat"]').val(data.data.nomor_plat);
                         $('[name="kapasitas"]').val(data.data.kapasitas);
-                        $('[name="harga_sewa"]').val(data.data.harga_sewa);
+                        $('[name="harga_sewa"]').val(formatRupiahValue(data.data.harga_sewa));
                         $('[name="deskripsi"]').val(data.data.deskripsi);
                         $('[name="jarak_tempuh"]').val(data.data.jarak_tempuh);
                         $('[name="status"]').val(data.data.status).change();
@@ -356,6 +365,20 @@
                     });
                 }
             });
+        }
+
+        function formatRupiah(element) {
+            let value = element.value;
+            value = value.replace(/[^0-9]/g, '');
+            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            element.value = value ? value : '';
+        }
+
+        function formatRupiahValue(value) {
+            value = value.toString();
+            value = value.replace(/[^0-9]/g, '');
+            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            return value;
         }
     </script>
 @endsection
