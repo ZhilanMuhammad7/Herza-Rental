@@ -102,7 +102,7 @@
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 
                             <li class="nav-item">
-                                <a class="nav-link active" id="pills-description-tab" data-toggle="pill"
+                                <a class="nav-link" id="pills-description-tab" data-toggle="pill"
                                     href="#pills-description" role="tab" aria-controls="pills-description"
                                     aria-expanded="true">Spesifikasi</a>
                             </li>
@@ -112,14 +112,14 @@
                                     aria-expanded="true">Deskripsi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review"
+                                <a class="nav-link active" id="pills-review-tab" data-toggle="pill" href="#pills-review"
                                     role="tab" aria-controls="pills-review" aria-expanded="true">Pesan</a>
                             </li>
                         </ul>
                     </div>
 
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
+                        <div class="tab-pane fade" id="pills-description" role="tabpanel"
                             aria-labelledby="pills-description-tab">
                             <div class="row">
                                 <div class="col-md-4">
@@ -147,7 +147,8 @@
                                 Ipsum decided to leave for the far World of Grammar.</p>
                         </div>
 
-                        <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+                        <div class="tab-pane fade show active" id="pills-review" role="tabpanel"
+                            aria-labelledby="pills-review-tab">
                             <div class="row">
                                 <div class="col-md-7">
                                     <h3 class="head">23 Reviews</h3>

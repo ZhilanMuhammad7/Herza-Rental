@@ -104,9 +104,8 @@
 
                     <p>
                         Copyright &copy;<script>
-                        document.write(new Date().getFullYear());
-                        </script> All rights reserved | Herza Rental by <a href="https://colorlib.com"
-                            target="_blank">Alif</a>
+                            document.write(new Date().getFullYear());
+                        </script> | Herza Rental
                     </p>
                 </div>
             </div>
