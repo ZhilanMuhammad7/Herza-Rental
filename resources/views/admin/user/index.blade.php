@@ -21,7 +21,6 @@
                             <tr class="fw-bold text-muted">
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>NIK</th>
                                 <th>Email</th>
                                 <th>No Hp</th>
                                 <th>Alamat</th>
@@ -39,15 +38,14 @@
                                     <tr>
                                         <td>{{ $loop->iteration + ($data->currentPage() - 1) * $data->perPage() }}</td>
                                         <td>{{ $item->nama }}</td>
-                                        <td></td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->no_hp }}</td>
                                         <td>{{ $item->alamat }}</td>
                                         <td>{{ $item->role }}</td>
                                         <td><a href="javascript:void(0)" onclick="edit('{{ $item->id }}')"><i
-                                                    class="fa fa-edit text-info"></i></a>
-                                            <a href="javascript:void(0)" onclick="hapus('{{ $item->id }}')"
-                                                style="color: red;"><i class="fas fa-trash text-danger"></i></a>
+                                                    class="fa fa-edit fs-6 text-info"></i></a>
+                                            <a href="javascript:void(0)" onclick="hapus('{{ $item->id }}')"><i
+                                                    class="fas fa-trash fs-6 text-danger"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -84,13 +82,13 @@
                             <input type="text" class="form-control bg-transparent" placeholder="Masukkan Nama"
                                 name="nama" />
                         </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
+                        {{-- <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">NIK</span>
                             </label>
                             <input type="text" class="form-control bg-transparent" placeholder="Masukkan NIK"
                                 name="nik" />
-                        </div>
+                        </div> --}}
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Email</span>

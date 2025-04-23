@@ -9,31 +9,31 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="{{asset('ladingPage/css/open-iconic-bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('ladingPage/css/animate.css')}}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/open-iconic-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/animate.css') }}">
 
-    <link rel="stylesheet" href="{{asset('ladingPage/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('ladingPage/css/owl.theme.default.min.css')}}">
-    <link rel="stylesheet" href="{{asset('ladingPage/css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/magnific-popup.css') }}">
 
-    <link rel="stylesheet" href="{{asset('ladingPage/css/aos.css')}}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/aos.css') }}">
 
-    <link rel="stylesheet" href="{{asset('ladingPage/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/ionicons.min.css') }}">
 
-    <link rel="stylesheet" href="{{asset('ladingPage/css/bootstrap-datepicker.css')}}">
-    <link rel="stylesheet" href="{{asset('ladingPage/css/jquery.timepicker.css')}}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/bootstrap-datepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/jquery.timepicker.css') }}">
 
 
-    <link rel="stylesheet" href="{{asset('ladingPage/css/flaticon.css')}}">
-    <link rel="stylesheet" href="{{asset('ladingPage/css/icomoon.css')}}">
-    <link rel="stylesheet" href="{{asset('ladingPage/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/icomoon.css') }}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/style.css') }}">
 </head>
 
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="{{url('/')}}">Herza<span>Rental</span></a>
+            <a class="navbar-brand" href="{{ url('/') }}">Herza<span>Rental</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
@@ -41,19 +41,24 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="{{url('/')}}" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="{{route('landingPage.mobil')}}" class="nav-link">Mobil</a></li>
-                    <li class="nav-item"><a href="{{route('landingPage.kontak')}}" class="nav-link">Kontak</a></li>
-                    <li class="nav-item"><a href="{{route('landingPage.order')}}" class="nav-link">Pesanan</a></li>
-                    <li class="nav-item"><a href="{{route('landingPage.profile')}}" class="nav-link">Profile</a></li>
-                    <li class="nav-item"><a href="{{route('login')}}" class="nav-link">Masuk</a></li>
+                    <li class="nav-item {{ request()->routeIs('landingPage.index') ? 'active' : '' }}"><a
+                            href="{{ url('/') }}" class="nav-link">Home</a></li>
+                    <li class="nav-item {{ request()->routeIs('landingPage.mobil') ? 'active' : '' }}"><a
+                            href="{{ route('landingPage.mobil') }}" class="nav-link">Mobil</a></li>
+                    <li class="nav-item {{ request()->routeIs('landingPage.kontak') ? 'active' : '' }}"><a
+                            href="{{ route('landingPage.kontak') }}" class="nav-link">Kontak</a></li>
+                    <li class="nav-item {{ request()->routeIs('landingPage.order') ? 'active' : '' }}"><a
+                            href="{{ route('landingPage.order') }}" class="nav-link">Pesanan</a></li>
+                    <li class="nav-item {{ request()->routeIs('landingPage.profile') ? 'active' : '' }}"><a
+                            href="{{ route('landingPage.profile') }}" class="nav-link">Profile</a></li>
+                    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Masuk</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <!-- END nav -->
 
-    <div class="hero-wrap ftco-degree-bg" style="background-image: url('{{asset('ladingPage/images/bg_1.jpg')}}');"
+    <div class="hero-wrap ftco-degree-bg" style="background-image: url('{{ asset('ladingPage/images/bg_1.jpg') }}');"
         data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
@@ -79,78 +84,28 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="carousel-car owl-carousel">
-                        <div class="item">
-                            <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end"
-                                    style="background-image: url('{{asset('ladingPage/images/car-1.jpg')}}');">
-                                </div>
-                                <div class="text">
-                                    <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-                                    <div class="d-flex mb-3">
-                                        <span class="cat">Cheverolet</span>
-                                        <p class="price ml-auto">Rp 500.000 </p>
+                        @foreach ($produk as $value)
+                            <div class="item">
+                                <div class="car-wrap rounded ftco-animate">
+                                    <div class="img rounded d-flex align-items-end"
+                                        style="background-image: url('{{ Storage::url($value->foto) }}');">
                                     </div>
-                                    <p class="d-flex mb-0 d-block">
-                                        <a href="{{route('landingPage.detailMobil')}}"
-                                            class="btn btn-secondary py-2 ml-1">Detail</a>
-                                    </p>
+                                    <div class="text">
+                                        <h2 class="mb-0"><a href="#">{{ $value->nama_mobil }} {{ $value->tahun }}</a></h2>
+                                        <div class="d-flex mb-3">
+                                            <span class="cat">{{ $value->jenis_mobil }}</span>
+                                            <p class="price ml-auto">
+                                                {{ isset($value->harga_sewa) ? 'Rp ' . number_format($value->harga_sewa, 0, ',', '.') : 'Rp 0' }}
+                                            </p>
+                                        </div>
+                                        <p class="d-flex mb-0 d-block">
+                                            <a href="{{ url('detail_mobil/' . Crypt::encryptString($value->id)) }}"
+                                                class="btn btn-secondary py-2 ml-1">Detail</a>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end"
-                                    style="background-image: url('{{asset('ladingPage/images/car-2.jpg')}}');">
-                                </div>
-                                <div class="text">
-                                    <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-                                    <div class="d-flex mb-3">
-                                        <span class="cat">Cheverolet</span>
-                                        <p class="price ml-auto">Rp 500.000 </p>
-                                    </div>
-                                    <p class="d-flex mb-0 d-block">
-                                        <a href="{{route('landingPage.detailMobil')}}"
-                                            class="btn btn-secondary py-2 ml-1">Detail</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end"
-                                    style="background-image: url('{{asset('ladingPage/images/car-3.jpg')}}');">
-                                </div>
-                                <div class="text">
-                                    <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-                                    <div class="d-flex mb-3">
-                                        <span class="cat">Cheverolet</span>
-                                        <p class="price ml-auto">Rp 500.000 </p>
-                                    </div>
-                                    <p class="d-flex mb-0 d-block">
-                                        <a href="{{route('landingPage.detailMobil')}}"
-                                            class="btn btn-secondary py-2 ml-1">Detail</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end"
-                                    style="background-image: url('{{asset('ladingPage/images/car-4.jpg')}}');">
-                                </div>
-                                <div class="text">
-                                    <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-                                    <div class="d-flex mb-3">
-                                        <span class="cat">Cheverolet</span>
-                                        <p class="price ml-auto">Rp 500.000 </p>
-                                    </div>
-                                    <p class="d-flex mb-0 d-block">
-                                        <a href="{{route('landingPage.detailMobil')}}"
-                                            class="btn btn-secondary py-2 ml-1">Detail</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -161,7 +116,7 @@
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center"
-                    style="background-image: url('{{asset('ladingPage/images/logo_herza.png')}}');">
+                    style="background-image: url('{{ asset('ladingPage/images/logo_herza.png') }}');">
                 </div>
                 <div class="col-md-6 wrap-about ftco-animate">
                     <div class="heading-section heading-section-white pl-md-5">
@@ -285,8 +240,9 @@
                 <div class="col-md-12 text-center">
 
                     <p>
-                        Copyright &copy;<script>
-                        document.write(new Date().getFullYear());
+                        Copyright &copy;
+                        <script>
+                            document.write(new Date().getFullYear());
                         </script> | Herza Rental
                     </p>
                 </div>
@@ -298,30 +254,30 @@
 
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-                stroke="#F96D00" />
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4"
+                stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4"
+                stroke-miterlimit="10" stroke="#F96D00" />
         </svg></div>
 
 
-    <script src="{{asset('ladingPage/js/jquery.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/jquery-migrate-3.0.1.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/popper.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/jquery.easing.1.3.js')}}"></script>
-    <script src="{{asset('ladingPage/js/jquery.waypoints.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/jquery.stellar.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/jquery.magnific-popup.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/aos.js')}}"></script>
-    <script src="{{asset('ladingPage/js/jquery.animateNumber.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/bootstrap-datepicker.js')}}"></script>
-    <script src="{{asset('ladingPage/js/jquery.timepicker.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/scrollax.min.js')}}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false">
-    </script>
-    <script src="{{asset('ladingPage/js/google-map.js')}}"></script>
-    <script src="{{asset('ladingPage/js/main.js')}}"></script>
+    <script src="{{ asset('ladingPage/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/jquery-migrate-3.0.1.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/popper.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/jquery.stellar.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/aos.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/jquery.animateNumber.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/jquery.timepicker.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/scrollax.min.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{{ asset('ladingPage/js/google-map.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/main.js') }}"></script>
 
 </body>
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Produk;
+use Illuminate\Support\Facades\Crypt;
 
 class LandingPageController extends Controller
 {
@@ -11,12 +13,14 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        return view('landingPage.index');
+        $produk = Produk::all();
+        return view('landingPage.index', compact('produk'));
     }
 
     public function mobil()
     {
-        return view('landingPage.mobil');
+        $produk = Produk::all();
+        return view('landingPage.mobil', compact('produk'));
     }
 
     public function profile()
@@ -34,9 +38,11 @@ class LandingPageController extends Controller
         return view('landingPage.kontak');
     }
 
-    public function detailMobil()
+    public function detail_mobil($id)
     {
-        return view('landingPage.detailMobil');
+        $decryptedId = Crypt::decryptString($id);
+        $produk =  Produk::find($decryptedId);
+        return view('landingPage.detail_mobil', compact('produk'));
     }
 
     public function invoice()
