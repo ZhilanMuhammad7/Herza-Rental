@@ -14,24 +14,19 @@ class LandingPageController extends Controller
         return view('landingPage.index');
     }
 
-    public function about()
-    {
-        return view('landingPage.about');
-    }
-
-    public function layanan()
-    {
-        return view('landingPage.layanan');
-    }
-
-    public function harga()
-    {
-        return view('landingPage.harga');
-    }
-
     public function mobil()
     {
         return view('landingPage.mobil');
+    }
+
+    public function profile()
+    {
+        return view('landingPage.profile');
+    }
+
+    public function order()
+    {
+        return view('landingPage.order');
     }
 
     public function kontak()
@@ -44,6 +39,10 @@ class LandingPageController extends Controller
         return view('landingPage.detailMobil');
     }
 
+    public function invoice()
+    {
+        return view('landingPage.invoice');
+    }
     /**
      * Show the form for creating a new resource.
      */

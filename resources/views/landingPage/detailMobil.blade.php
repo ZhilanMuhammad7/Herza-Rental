@@ -1,11 +1,14 @@
 @extends('layouts.masterUser')
 @section('content')
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('{{asset('ladingPage/images/bg_3.jpg')}}');" data-stellar-background-ratio="0.5">
+<section class="hero-wrap hero-wrap-2 js-fullheight"
+    style="background-image: url('{{asset('ladingPage/images/bg_2.jpg')}}');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
             <div class="col-md-9 ftco-animate pb-5">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Detail Mobil <i class="ion-ios-arrow-forward"></i></span></p>
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
+                                class="ion-ios-arrow-forward"></i></a></span> <span>Detail Mobil <i
+                            class="ion-ios-arrow-forward"></i></span></p>
                 <h1 class="mb-3 bread">Detail Mobil</h1>
             </div>
         </div>
@@ -17,7 +20,8 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="car-details">
-                    <div class="img rounded" style="background-image: url('{{asset('ladingPage/images/bg_1.jpg')}}');"></div>
+                    <div class="img rounded" style="background-image: url('{{asset('ladingPage/images/bg_1.jpg')}}');">
+                    </div>
                     <div class="text text-center">
                         <span class="subheading">Cheverolet</span>
                         <h2>Mercedes Grand Sedan</h2>
@@ -30,7 +34,8 @@
                 <div class="media block-6 services">
                     <div class="media-body py-md-4">
                         <div class="d-flex mb-3 align-items-center">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dashboard"></span></div>
+                            <div class="icon d-flex align-items-center justify-content-center"><span
+                                    class="flaticon-dashboard"></span></div>
                             <div class="text">
                                 <h3 class="heading mb-0 pl-3">
                                     Kilometer
@@ -45,7 +50,8 @@
                 <div class="media block-6 services">
                     <div class="media-body py-md-4">
                         <div class="d-flex mb-3 align-items-center">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pistons"></span></div>
+                            <div class="icon d-flex align-items-center justify-content-center"><span
+                                    class="flaticon-pistons"></span></div>
                             <div class="text">
                                 <h3 class="heading mb-0 pl-3">
                                     Transmisi
@@ -60,7 +66,8 @@
                 <div class="media block-6 services">
                     <div class="media-body py-md-4">
                         <div class="d-flex mb-3 align-items-center">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car-seat"></span></div>
+                            <div class="icon d-flex align-items-center justify-content-center"><span
+                                    class="flaticon-car-seat"></span></div>
                             <div class="text">
                                 <h3 class="heading mb-0 pl-3">
                                     Kapasitas
@@ -75,7 +82,8 @@
                 <div class="media block-6 services">
                     <div class="media-body py-md-4">
                         <div class="d-flex mb-3 align-items-center">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-diesel"></span></div>
+                            <div class="icon d-flex align-items-center justify-content-center"><span
+                                    class="flaticon-diesel"></span></div>
                             <div class="text">
                                 <h3 class="heading mb-0 pl-3">
                                     Bahan Bakar
@@ -94,19 +102,25 @@
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 
                             <li class="nav-item">
-                                <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-expanded="true">Spesifikasi</a>
+                                <a class="nav-link active" id="pills-description-tab" data-toggle="pill"
+                                    href="#pills-description" role="tab" aria-controls="pills-description"
+                                    aria-expanded="true">Spesifikasi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill" href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer" aria-expanded="true">Deskripsi</a>
+                                <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill"
+                                    href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer"
+                                    aria-expanded="true">Deskripsi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-expanded="true">Cicilan</a>
+                                <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review"
+                                    role="tab" aria-controls="pills-review" aria-expanded="true">Pesan</a>
                             </li>
                         </ul>
                     </div>
 
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+                        <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
+                            aria-labelledby="pills-description-tab">
                             <div class="row">
                                 <div class="col-md-4">
                                     <ul class="features">
@@ -118,16 +132,19 @@
                                 <div class="col-md-4">
                                     <ul class="features">
                                         <li class="check"><span class="ion-ios-checkmark"></span>Sabuk Pengaman</li>
-                                        <li class="check"><span class="ion-ios-checkmark"></span>Dongkrak dan Kunci Ban</li>
+                                        <li class="check"><span class="ion-ios-checkmark"></span>Dongkrak dan Kunci Ban
+                                        </li>
                                         <li class="check"><span class="ion-ios-checkmark"></span>Remot Kunci</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
-                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-                            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+                        <div class="tab-pane fade" id="pills-manufacturer" role="tabpanel"
+                            aria-labelledby="pills-manufacturer-tab">
+                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost
+                                unorthographic life One day however a small line of blind text by the name of Lorem
+                                Ipsum decided to leave for the far World of Grammar.</p>
                         </div>
 
                         <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
@@ -135,7 +152,9 @@
                                 <div class="col-md-7">
                                     <h3 class="head">23 Reviews</h3>
                                     <div class="review d-flex">
-                                        <div class="user-img" style="background-image: url('{{asset('ladingPage/images/person_1.jpg')}}');"></div>
+                                        <div class="user-img"
+                                            style="background-image: url('{{asset('ladingPage/images/person_1.jpg')}}');">
+                                        </div>
                                         <div class="desc">
                                             <h4>
                                                 <span class="text-left">Jacob Webb</span>
@@ -149,13 +168,17 @@
                                                     <i class="ion-ios-star"></i>
                                                     <i class="ion-ios-star"></i>
                                                 </span>
-                                                <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+                                                <span class="text-right"><a href="#" class="reply"><i
+                                                            class="icon-reply"></i></a></span>
                                             </p>
-                                            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+                                            <p>When she reached the first hills of the Italic Mountains, she had a last
+                                                view back on the skyline of her hometown Bookmarksgrov</p>
                                         </div>
                                     </div>
                                     <div class="review d-flex">
-                                        <div class="user-img" style="background-image: url('{{asset('ladingPage/images/person_2.jpg')}}');"></div>
+                                        <div class="user-img"
+                                            style="background-image: url('{{asset('ladingPage/images/person_2.jpg')}}');">
+                                        </div>
                                         <div class="desc">
                                             <h4>
                                                 <span class="text-left">Jacob Webb</span>
@@ -169,9 +192,11 @@
                                                     <i class="ion-ios-star"></i>
                                                     <i class="ion-ios-star"></i>
                                                 </span>
-                                                <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+                                                <span class="text-right"><a href="#" class="reply"><i
+                                                            class="icon-reply"></i></a></span>
                                             </p>
-                                            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+                                            <p>When she reached the first hills of the Italic Mountains, she had a last
+                                                view back on the skyline of her hometown Bookmarksgrov</p>
                                         </div>
                                     </div>
                                     <div class="review d-flex">
@@ -189,9 +214,11 @@
                                                     <i class="ion-ios-star"></i>
                                                     <i class="ion-ios-star"></i>
                                                 </span>
-                                                <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+                                                <span class="text-right"><a href="#" class="reply"><i
+                                                            class="icon-reply"></i></a></span>
                                             </p>
-                                            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+                                            <p>When she reached the first hills of the Italic Mountains, she had a last
+                                                view back on the skyline of her hometown Bookmarksgrov</p>
                                         </div>
                                     </div>
                                 </div>
