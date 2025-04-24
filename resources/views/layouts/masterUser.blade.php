@@ -49,9 +49,17 @@
                             href="{{ route('landingPage.kontak') }}" class="nav-link">Kontak</a></li>
                     <li class="nav-item {{ request()->routeIs('landingPage.order') ? 'active' : '' }}"><a
                             href="{{ route('landingPage.order') }}" class="nav-link">Pesanan</a></li>
-                    <li class="nav-item {{ request()->routeIs('landingPage.profile') ? 'active' : '' }}"><a
-                            href="{{ route('landingPage.profile') }}" class="nav-link">Profile</a></li>
-                    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Masuk</a></li>
+                    @auth
+                        @if (auth()->user()->role == 'user')
+                            <li class="nav-item {{ request()->routeIs('landingPage.profile') ? 'active' : '' }}"><a
+                                    href="{{ route('landingPage.profile') }}" class="nav-link">Profile</a></li>
+                        @endif
+                    @endauth
+                    @if (Auth::check())
+                        <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link">Keluar</a></li>
+                    @else
+                        <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Masuk</a></li>
+                    @endif
                 </ul>
             </div>
         </div>

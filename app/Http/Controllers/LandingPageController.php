@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produk;
+use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Auth;
 
 class LandingPageController extends Controller
 {
@@ -25,7 +27,9 @@ class LandingPageController extends Controller
 
     public function profile()
     {
-        return view('landingPage.profile');
+        $id = Auth::user()->id;
+        $user = User::find($id);
+        return view('landingPage.profile', compact('user'));
     }
 
     public function order()

@@ -49,9 +49,17 @@
                             href="{{ route('landingPage.kontak') }}" class="nav-link">Kontak</a></li>
                     <li class="nav-item {{ request()->routeIs('landingPage.order') ? 'active' : '' }}"><a
                             href="{{ route('landingPage.order') }}" class="nav-link">Pesanan</a></li>
-                    <li class="nav-item {{ request()->routeIs('landingPage.profile') ? 'active' : '' }}"><a
-                            href="{{ route('landingPage.profile') }}" class="nav-link">Profile</a></li>
-                    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Masuk</a></li>
+                    @auth
+                        @if (auth()->user()->role == 'user')
+                            <li class="nav-item {{ request()->routeIs('landingPage.profile') ? 'active' : '' }}"><a
+                                    href="{{ route('landingPage.profile') }}" class="nav-link">Profile</a></li>
+                        @endif
+                    @endauth
+                    @if (Auth::check())
+                        <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link">Keluar</a></li>
+                    @else
+                        <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Masuk</a></li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -91,7 +99,8 @@
                                         style="background-image: url('{{ Storage::url($value->foto) }}');">
                                     </div>
                                     <div class="text">
-                                        <h2 class="mb-0"><a href="#">{{ $value->nama_mobil }} {{ $value->tahun }}</a></h2>
+                                        <h2 class="mb-0"><a href="#">{{ $value->nama_mobil }}
+                                                {{ $value->tahun }}</a></h2>
                                         <div class="d-flex mb-3">
                                             <span class="cat">{{ $value->jenis_mobil }}</span>
                                             <p class="price ml-auto">

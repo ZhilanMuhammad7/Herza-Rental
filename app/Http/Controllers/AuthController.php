@@ -21,7 +21,7 @@ class AuthController extends Controller
             if (Auth::user()->role == 'admin') {
                 return redirect('/dashboard');
             } elseif (Auth::user()->role == 'user') {
-                return redirect()->route('login')->with('error', 'Anda tidak memiliki akses admin!');
+                return redirect()->route('landingPage.index');
             } else {
                 return redirect()->route('login')->with('error', 'Email atau password salah!');
             }
@@ -64,7 +64,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::guard('web')->logout();
-        return redirect('/login');
+        return redirect('/');
     }
 
     public function register()
