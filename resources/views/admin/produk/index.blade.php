@@ -10,15 +10,15 @@
                 <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                     title="Klik untuk tambah produk">
                     <button type="button" class="btn btn-primary er fs-6 px-4 py-2" onclick="add_ajax()">
-                        <i class="ki-outline ki-plus fs-2"></i> Tambah Produk
+                        <i class="ki-outline ki-plus fs-2"></i> Tambah
                     </button>
                 </div>
             </div>
             <div class="card-body py-3">
                 <div class="table-responsive">
-                    <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                    <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
                         <thead>
-                            <tr class="fw-bold text-muted">
+                            <tr class="fw-bold fs-6 text-gray-800 px-7">
                                 <th>No</th>
                                 <th>Nama Mobil</th>
                                 <th>Jenis Mobil</th>
@@ -35,65 +35,59 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($data->isEmpty())
+
+                            @foreach ($data as $item)
                                 <tr>
-                                    <td colspan="13" class="text-center text-muted">No record found</td>
-                                </tr>
-                            @else
-                                @foreach ($data as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration + ($data->currentPage() - 1) * $data->perPage() }}</td>
-                                        <td>{{ $item->nama_mobil }}</td>
-                                        <td>{{ $item->jenis_mobil }}</td>
-                                        <td>{{ $item->tahun }}</td>
-                                        <td>{{ $item->nomor_plat }}</td>
-                                        <td>{{ $item->kapasitas }}</td>
-                                        <td> {{ isset($item->harga_sewa) ? 'Rp ' . number_format($item->harga_sewa, 0, ',', '.') : 'Rp 0' }}
-                                        </td>
-                                        <td>{{ $item->kondisi }}</td>
-                                        <td>{{ $item->bahan_bakar }}</td>
-                                        <td>{{ $item->jarak_tempuh }} Km</td>
-                                        <td>
-                                            @if ($item->status == 'Tersedia')
-                                                <span class="badge badge-light-primary">{{ $item->status }}</span>
-                                            @elseif($item->status == 'Disewa')
-                                                <span class="badge badge-light-danger">{{ $item->status }}</span>
-                                            @else
-                                                <span class="badge badge-light-success">{{ $item->status }}</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <span style="cursor: pointer; color: blue; text-decoration: underline;"
-                                                data-bs-toggle="modal" data-bs-target="#viewImage{{ $item->id }}">
-                                                Foto
-                                            </span>
-                                            <div class="modal fade" id="viewImage{{ $item->id }}" tabindex="-1"
-                                                aria-labelledby="viewImageModalLabel{{ $item->id }}"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title"
-                                                                id="viewImageModalLabel{{ $item->id }}">Foto</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <img src="{{ Storage::url($item->foto) }}" alt="product image"
-                                                                class="img-fluid">
-                                                        </div>
+                                    <td>{{ $loop->iteration + ($data->currentPage() - 1) * $data->perPage() }}</td>
+                                    <td>{{ $item->nama_mobil }}</td>
+                                    <td>{{ $item->jenis_mobil }}</td>
+                                    <td>{{ $item->tahun }}</td>
+                                    <td>{{ $item->nomor_plat }}</td>
+                                    <td>{{ $item->kapasitas }}</td>
+                                    <td> {{ isset($item->harga_sewa) ? 'Rp ' . number_format($item->harga_sewa, 0, ',', '.') : 'Rp 0' }}
+                                    </td>
+                                    <td>{{ $item->kondisi }}</td>
+                                    <td>{{ $item->bahan_bakar }}</td>
+                                    <td>{{ $item->jarak_tempuh }} Km</td>
+                                    <td>
+                                        @if ($item->status == 'Tersedia')
+                                            <span class="badge badge-light-primary">{{ $item->status }}</span>
+                                        @elseif($item->status == 'Disewa')
+                                            <span class="badge badge-light-danger">{{ $item->status }}</span>
+                                        @else
+                                            <span class="badge badge-light-success">{{ $item->status }}</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <span style="cursor: pointer; color: blue; text-decoration: underline;"
+                                            data-bs-toggle="modal" data-bs-target="#viewImage{{ $item->id }}">
+                                            Foto
+                                        </span>
+                                        <div class="modal fade" id="viewImage{{ $item->id }}" tabindex="-1"
+                                            aria-labelledby="viewImageModalLabel{{ $item->id }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title"
+                                                            id="viewImageModalLabel{{ $item->id }}">Foto</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <img src="{{ Storage::url($item->foto) }}" alt="product image"
+                                                            class="img-fluid">
                                                     </div>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td><a href="javascript:void(0)" onclick="edit('{{ $item->id }}')"><i
-                                                    class="fa fa-edit text-info"></i></a>
-                                            <a href="javascript:void(0)" onclick="hapus('{{ $item->id }}')"
-                                                style="color: red;"><i class="fas fa-trash text-danger"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
+                                        </div>
+                                    </td>
+                                    <td><a href="javascript:void(0)" onclick="edit('{{ $item->id }}')"><i
+                                                class="fa fa-edit fs-6 text-info"></i></a>
+                                        <a href="javascript:void(0)" onclick="hapus('{{ $item->id }}')"><i
+                                                class="fas fa-trash fs-6 text-danger"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <div class="d-flex justify-content-start">

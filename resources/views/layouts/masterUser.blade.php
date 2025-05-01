@@ -9,31 +9,31 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="{{asset('ladingPage/css/open-iconic-bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('ladingPage/css/animate.css')}}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/open-iconic-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/animate.css') }}">
 
-    <link rel="stylesheet" href="{{asset('ladingPage/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('ladingPage/css/owl.theme.default.min.css')}}">
-    <link rel="stylesheet" href="{{asset('ladingPage/css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/magnific-popup.css') }}">
 
-    <link rel="stylesheet" href="{{asset('ladingPage/css/aos.css')}}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/aos.css') }}">
 
-    <link rel="stylesheet" href="{{asset('ladingPage/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/ionicons.min.css') }}">
 
-    <link rel="stylesheet" href="{{asset('ladingPage/css/bootstrap-datepicker.css')}}">
-    <link rel="stylesheet" href="{{asset('ladingPage/css/jquery.timepicker.css')}}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/bootstrap-datepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/jquery.timepicker.css') }}">
 
 
-    <link rel="stylesheet" href="{{asset('ladingPage/css/flaticon.css')}}">
-    <link rel="stylesheet" href="{{asset('ladingPage/css/icomoon.css')}}">
-    <link rel="stylesheet" href="{{asset('ladingPage/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/icomoon.css') }}">
+    <link rel="stylesheet" href="{{ asset('ladingPage/css/style.css') }}">
 </head>
 
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="{{url('/')}}">Herza<span>Rental</span></a>
+            <a class="navbar-brand" href="{{ url('/') }}">Herza<span>Rental</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
@@ -41,13 +41,25 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="{{url('/')}}" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="{{route('landingPage.mobil')}}" class="nav-link">Mobil</a></li>
-                    <li class="nav-item"><a href="{{route('landingPage.kontak')}}" class="nav-link">Kontak</a></li>
-                    <li class="nav-item"><a href="{{route('landingPage.order')}}" class="nav-link">Pesanan</a></li>
-                    <li class="nav-item"><a href="{{route('landingPage.profile')}}" class="nav-link">Profile</a></li>
-                    <li class="nav-item"><a href="{{route('login')}}" class="nav-link">Masuk</a></li>
-                    <!-- <li class="nav-item"><a href="{{route('register')}}" class="nav-link">Daftar</a></li> -->
+                    <li class="nav-item {{ request()->routeIs('landingPage.index') ? 'active' : '' }}"><a
+                            href="{{ url('/') }}" class="nav-link">Home</a></li>
+                    <li class="nav-item {{ request()->routeIs('landingPage.mobil') ? 'active' : '' }}"><a
+                            href="{{ route('landingPage.mobil') }}" class="nav-link">Mobil</a></li>
+                    <li class="nav-item {{ request()->routeIs('landingPage.kontak') ? 'active' : '' }}"><a
+                            href="{{ route('landingPage.kontak') }}" class="nav-link">Kontak</a></li>
+                    <li class="nav-item {{ request()->routeIs('landingPage.order') ? 'active' : '' }}"><a
+                            href="{{ route('landingPage.order') }}" class="nav-link">Pesanan</a></li>
+                    @auth
+                        @if (auth()->user()->role == 'user')
+                            <li class="nav-item {{ request()->routeIs('landingPage.profile') ? 'active' : '' }}"><a
+                                    href="{{ route('landingPage.profile') }}" class="nav-link">Profile</a></li>
+                        @endif
+                    @endauth
+                    @if (Auth::check())
+                        <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link">Keluar</a></li>
+                    @else
+                        <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Masuk</a></li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -103,7 +115,8 @@
                 <div class="col-md-12 text-center">
 
                     <p>
-                        Copyright &copy;<script>
+                        Copyright &copy;
+                        <script>
                             document.write(new Date().getFullYear());
                         </script> | Herza Rental
                     </p>
@@ -116,30 +129,30 @@
 
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-                stroke="#F96D00" />
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4"
+                stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4"
+                stroke-miterlimit="10" stroke="#F96D00" />
         </svg></div>
 
 
-    <script src="{{asset('ladingPage/js/jquery.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/jquery-migrate-3.0.1.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/popper.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/jquery.easing.1.3.js')}}"></script>
-    <script src="{{asset('ladingPage/js/jquery.waypoints.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/jquery.stellar.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/jquery.magnific-popup.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/aos.js')}}"></script>
-    <script src="{{asset('ladingPage/js/jquery.animateNumber.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/bootstrap-datepicker.js')}}"></script>
-    <script src="{{asset('ladingPage/js/jquery.timepicker.min.js')}}"></script>
-    <script src="{{asset('ladingPage/js/scrollax.min.js')}}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false">
-    </script>
-    <script src="{{asset('ladingPage/js/google-map.js')}}"></script>
-    <script src="{{asset('ladingPage/js/main.js')}}"></script>
+    <script src="{{ asset('ladingPage/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/jquery-migrate-3.0.1.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/popper.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/jquery.stellar.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/aos.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/jquery.animateNumber.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/jquery.timepicker.min.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/scrollax.min.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{{ asset('ladingPage/js/google-map.js') }}"></script>
+    <script src="{{ asset('ladingPage/js/main.js') }}"></script>
 
 </body>
 

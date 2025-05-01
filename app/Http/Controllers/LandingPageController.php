@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Produk;
+use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Auth;
 
 class LandingPageController extends Controller
 {
@@ -11,17 +15,21 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        return view('landingPage.index');
+        $produk = Produk::all();
+        return view('landingPage.index', compact('produk'));
     }
 
     public function mobil()
     {
-        return view('landingPage.mobil');
+        $produk = Produk::all();
+        return view('landingPage.mobil', compact('produk'));
     }
 
     public function profile()
     {
-        return view('landingPage.profile');
+        $id = Auth::user()->id;
+        $user = User::find($id);
+        return view('landingPage.profile', compact('user'));
     }
 
     public function order()
@@ -34,9 +42,11 @@ class LandingPageController extends Controller
         return view('landingPage.kontak');
     }
 
-    public function detailMobil()
+    public function detail_mobil($id)
     {
-        return view('landingPage.detailMobil');
+        $decryptedId = Crypt::decryptString($id);
+        $produk =  Produk::find($decryptedId);
+        return view('landingPage.detail_mobil', compact('produk'));
     }
 
     public function invoice()

@@ -21,7 +21,7 @@ Route::prefix('/')->group(function () {
     Route::get('/order', [LandingPageController::class, 'order'])->name('landingPage.order');
     Route::get('/kontak', [LandingPageController::class, 'kontak'])->name('landingPage.kontak');
     Route::get('/invoice', [LandingPageController::class, 'invoice'])->name('landingPage.invoice');
-    Route::get('/detailMobil', [LandingPageController::class, 'detailMobil'])->name('landingPage.detailMobil');
+    Route::get('detail_mobil/{id}', [LandingPageController::class, 'detail_mobil'])->name('landingPage.detail_mobil');
 });
 
 Route::middleware(['custom-auth'])->group(

@@ -1,7 +1,7 @@
 @extends('layouts.masterUser')
 @section('content')
 <section class="hero-wrap hero-wrap-2 js-fullheight"
-    style="background-image: url('{{asset('ladingPage/images/bg_2.jpg')}}');" data-stellar-background-ratio="0.5">
+    style="background-image: url('{{ asset('ladingPage/images/bg_2.jpg') }}');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
@@ -22,27 +22,27 @@
                 <div class="row align-items-center">
                     <!-- Foto Profil -->
                     <div class="col-md-4 text-center mb-4 mb-md-0">
-                        <img src="{{asset('ladingPage/images/person_1.jpg')}}" alt="Foto Profil"
+                        <img src="{{ asset('ladingPage/images/person_1.jpg') }}" alt="Foto Profil"
                             class="img-fluid rounded-circle shadow-sm"
                             style="width: 150px; height: 150px; object-fit: cover;">
-                        <h4 class="mt-3">Alif Alprega</h4>
-                        <p class="text-muted mb-0">Member sejak 12/12/12</p>
+                        <h4 class="mt-3">{{ $user->nama }}</h4>
+                        <p class="text-muted mb-0">Pelanggan</p>
                     </div>
 
                     <!-- Detail Info -->
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <i class="fa fa-envelope text-primary mr-2"></i><strong>Email:</strong>
-                                <p class="mb-1">alip@gmail.com</p>
+                                <strong>Email:</strong>
+                                <p class="mb-1">{{ $user->email }}</p>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <i class="fa fa-phone text-primary mr-2"></i><strong>Telepon:</strong>
-                                <p class="mb-1">081291226574</p>
+                                <strong>Telepon:</strong>
+                                <p class="mb-1">{{ $user->no_hp }}</p>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <i class="fa fa-map-marker text-primary mr-2"></i><strong>Alamat:</strong>
-                                <p class="mb-1">Jl Kenangan Indah Nomor 12, Jakarta</p>
+                                <strong>Alamat:</strong>
+                                <p class="mb-1">{{ $user->alamat }}</p>
                             </div>
                         </div>
                     </div>
@@ -51,5 +51,4 @@
         </div>
     </div>
 </section>
-
 @endsection
