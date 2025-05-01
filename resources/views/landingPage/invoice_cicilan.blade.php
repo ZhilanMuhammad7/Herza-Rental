@@ -1,15 +1,16 @@
 @extends('layouts.masterUser')
 @section('content')
 <section class="hero-wrap hero-wrap-2 js-fullheight"
-    style="background-image: url('{{asset('ladingPage/images/bg_2.jpg')}}');" data-stellar-background-ratio="0.5">
+    style="background-image: url('{{ asset('ladingPage/images/bg_2.jpg') }}');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
             <div class="col-md-9 ftco-animate pb-5">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
-                                class="ion-ios-arrow-forward"></i></a></span> <span>Invoice <i
-                            class="ion-ios-arrow-forward"></i></span></p>
-                <h1 class="mb-3 bread">Invoice Anda</h1>
+                <p class="breadcrumbs">
+                    <span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span>
+                    <span>Invoice <i class="ion-ios-arrow-forward"></i></span>
+                </p>
+                <h1 class="mb-3 bread">Invoice Cicilan Anda</h1>
             </div>
         </div>
     </div>
@@ -26,10 +27,10 @@
                 </p>
             </div>
             <div class="col-md-6 text-right">
-                <h4><strong>Invoice</strong></h4>
-                <p>No. Invoice: <strong>#INV-000123</strong><br>
-                    Tanggal: <strong>12/12/12</strong><br>
-                    Status: <span class="badge badge-success">Lunas</span>
+                <h4><strong>Invoice Cicilan</strong></h4>
+                <p>No. Invoice: <strong>#INV-CICIL-000456</strong><br>
+                    Tanggal: <strong>01/05/2025</strong><br>
+                    Status: <span class="badge badge-warning">Cicilan Berjalan</span>
                 </p>
             </div>
         </div>
@@ -59,37 +60,46 @@
             <tbody>
                 <tr class="text-center">
                     <td>1</td>
-                    <td>Nama Produk 1</td>
-                    <td>2</td>
-                    <td>Rp 100.000</td>
-                    <td>Rp 200.000</td>
-                </tr>
-                <tr class="text-center">
-                    <td>2</td>
-                    <td>Nama Produk 2</td>
+                    <td>Nama Produk Cicilan</td>
                     <td>1</td>
-                    <td>Rp 150.000</td>
-                    <td>Rp 150.000</td>
+                    <td>Rp 1.500.000</td>
+                    <td>Rp 1.500.000</td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <th colspan="4" class="text-right">Subtotal</th>
-                    <th>Rp 350.000</th>
+                    <th colspan="4" class="text-right">Total Harga</th>
+                    <th>Rp 1.500.000</th>
                 </tr>
                 <tr>
-                    <th colspan="4" class="text-right">Pajak (10%)</th>
-                    <th>Rp 35.000</th>
+                    <th colspan="4" class="text-right">Uang Muka (DP)</th>
+                    <th>Rp 300.000</th>
                 </tr>
                 <tr>
-                    <th colspan="4" class="text-right">Total Bayar</th>
-                    <th>Rp 385.000</th>
+                    <th colspan="4" class="text-right">Sisa Cicilan</th>
+                    <th>Rp 1.200.000</th>
+                </tr>
+                <tr>
+                    <th colspan="4" class="text-right">Tenor</th>
+                    <th>6 Bulan</th>
+                </tr>
+                <tr>
+                    <th colspan="4" class="text-right">Angsuran per Bulan</th>
+                    <th>Rp 200.000</th>
+                </tr>
+                <tr>
+                    <th colspan="4" class="text-right">Status Pembayaran Terakhir</th>
+                    <th><span class="badge badge-info">Sudah bayar 2x (Rp 400.000)</span></th>
+                </tr>
+                <tr>
+                    <th colspan="4" class="text-right">Sisa Pembayaran</th>
+                    <th>Rp 800.000</th>
                 </tr>
             </tfoot>
         </table>
         <a href="" class="btn btn-primary mt-3">Selesai</a>
         <div class="text-center mt-5">
-            <p>Terima kasih telah percaya kepada <strong>Herza Rental</strong>!</p>
+            <p>Terima kasih telah melakukan pembayaran cicilan di <strong>Herza Rental</strong>.</p>
         </div>
     </div>
 </section>

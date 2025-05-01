@@ -53,6 +53,11 @@ class LandingPageController extends Controller
     {
         return view('landingPage.invoice');
     }
+
+    public function invoice_cicilan()
+    {
+        return view('landingPage.invoice_cicilan');
+    }
     /**
      * Show the form for creating a new resource.
      */
