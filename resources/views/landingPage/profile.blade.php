@@ -44,10 +44,6 @@
                                 <i class="fa fa-map-marker text-primary mr-2"></i><strong>Alamat:</strong>
                                 <p class="mb-1">Jl Kenangan Indah Nomor 12, Jakarta</p>
                             </div>
-                            <div class="col-md-12 text-right">
-                                <a href="" class="btn btn-primary px-4 mt-2">Edit
-                                    Profil</a>
-                            </div>
                         </div>
                     </div>
                 </div>
