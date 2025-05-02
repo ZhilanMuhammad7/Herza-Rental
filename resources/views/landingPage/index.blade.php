@@ -132,7 +132,7 @@
                         <span class="subheading">Tentang Kami</span>
                         <h2 class="mb-4">Selamat Datang di Herza Rental</h2>
 
-                        <p>
+                        <p style="text-align: justify;">
                             Herza Rental adalah penyedia layanan rental kendaraan terpercaya yang berkomitmen untuk
                             memberikan pengalaman terbaik
                             bagi pelanggan kami. Dengan armada kendaraan yang lengkap, kondisi prima, dan harga yang
@@ -140,7 +140,7 @@
                             kami siap memenuhi kebutuhan transportasi Anda, baik untuk keperluan pribadi, bisnis, maupun
                             liburan.
                         </p>
-                        <p>
+                        <p style="text-align: justify;">
                             Didukung oleh tim profesional yang ramah dan berpengalaman, kami selalu mengutamakan
                             kepuasan pelanggan dengan memberikan
                             layanan yang cepat, aman, dan mudah. Pilih Herza Rental sebagai mitra perjalanan Anda, dan
