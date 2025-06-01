@@ -2,24 +2,22 @@
 @section('content')
     <div id="kt_app_content_container" class="app-container container-fluid">
         <div class="card mb-5 mb-xl-8">
-            <!--begin::Header-->
             <div class="card-header border-0 pt-5">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bold fs-3 mb-1">Data Produk</span>
+                    <span class="card-label fw-bold fs-3 mb-1">Manage Produk</span>
+                    <span class="text-muted mt-1 fw-semibold fs-7">Produk</span>
                 </h3>
-                <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
-                    title="Klik untuk tambah produk">
-                    <button type="button" class="btn btn-primary er fs-6 px-4 py-2" onclick="add_ajax()">
-                        <i class="ki-outline ki-plus fs-2"></i> Tambah
-                    </button>
+                <div class="card-toolbar">
+                    <a href="#" class="btn btn-sm btn-primary" onclick="add_ajax()">
+                        <i class="ki-outline ki-plus fs-2"></i>Tambah</a>
                 </div>
             </div>
             <div class="card-body py-3">
                 <div class="table-responsive">
-                    <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
+                    <table class="table align-middle gs-0 gy-4">
                         <thead>
-                            <tr class="fw-bold fs-6 text-gray-800 px-7">
-                                <th>No</th>
+                            <tr class="fw-bold text-muted bg-light">
+                                <th class="ps-4 rounded-start">No</th>
                                 <th>Nama Mobil</th>
                                 <th>Jenis Mobil</th>
                                 <th>Tahun</th>
@@ -31,14 +29,14 @@
                                 <th>Jarak Tempuh</th>
                                 <th>Status</th>
                                 <th>Foto</th>
-                                <th>Aksi</th>
+                                <th class="rounded-end"> Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-
                             @foreach ($data as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration + ($data->currentPage() - 1) * $data->perPage() }}</td>
+                                    <td class="ps-4">
+                                        {{ $loop->iteration + ($data->currentPage() - 1) * $data->perPage() }}</td>
                                     <td>{{ $item->nama_mobil }}</td>
                                     <td>{{ $item->jenis_mobil }}</td>
                                     <td>{{ $item->tahun }}</td>
@@ -59,32 +57,17 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <span style="cursor: pointer; color: blue; text-decoration: underline;"
-                                            data-bs-toggle="modal" data-bs-target="#viewImage{{ $item->id }}">
+                                        <a href="{{ Storage::url($item->foto) }}" target="_blank"
+                                            style="color: blue; text-decoration: underline;">
                                             Foto
-                                        </span>
-                                        <div class="modal fade" id="viewImage{{ $item->id }}" tabindex="-1"
-                                            aria-labelledby="viewImageModalLabel{{ $item->id }}" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title"
-                                                            id="viewImageModalLabel{{ $item->id }}">Foto</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <img src="{{ Storage::url($item->foto) }}" alt="product image"
-                                                            class="img-fluid">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </td>
-                                    <td><a href="javascript:void(0)" onclick="edit('{{ $item->id }}')"><i
-                                                class="fa fa-edit fs-6 text-info"></i></a>
-                                        <a href="javascript:void(0)" onclick="hapus('{{ $item->id }}')"><i
-                                                class="fas fa-trash fs-6 text-danger"></i></a>
+                                    <td><a href="javascript:void(0)" onclick="edit('{{ $item->id }}')"
+                                            class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                            <i class="ki-outline ki-pencil fs-2 text-info"></i></a>
+                                        <a href="javascript:void(0)" onclick="hapus('{{ $item->id }}')"
+                                            class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                            <i class="ki-outline ki-trash fs-2 text-danger"></i>
                                     </td>
                                 </tr>
                             @endforeach

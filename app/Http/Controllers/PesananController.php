@@ -5,123 +5,76 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pesanan;
 use App\Models\Produk;
-use App\Models\User;
+use App\Models\Cicilan;
+use Illuminate\Support\Facades\Auth;
 
 class PesananController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        $data = Pesanan::leftJoin('users', 'users.id', '=', 'pesanan.user_id')
-            ->leftJoin('produk', 'produk.id', '=', 'pesanan.produk_id')
-            ->select('pesanan.*', 'users.nama', 'users.no_hp', 'produk.nama_mobil')
-            ->paginate(10);
-        $user = User::where('role', 'user')->get();
-        $produk = Produk::all();
-        return view('admin.pesanan.index', compact('data', 'user', 'produk'));
+        $data = Pesanan::paginate(10);
+        return view('admin.pesanan.index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $produk = Produk::find($request->produk_id);
 
+        $lastPesanan = Pesanan::orderBy('created_at', 'desc')->first();
+
+        if ($lastPesanan && $lastPesanan->no_pesanan) {
+            $lastNumber = (int) str_replace('INV-', '', $lastPesanan->no_pesanan);
+            $newNumber = $lastNumber + 1;
+        } else {
+            $newNumber = 1;
+        }
+        $noPesanan = 'INV-' . str_pad($newNumber, 2, '0', STR_PAD_LEFT);
+        $totalHarga = $produk->harga_sewa * $request->jumlah_hari;
+
         $data = Pesanan::create([
-            'user_id' => $request->user_id,
+            'no_pesanan' => $noPesanan,
+            'user_id' => Auth::id(),
             'produk_id' => $request->produk_id,
+            'jumlah_hari' => $request->jumlah_hari,
             'tgl_mulai' => $request->tgl_mulai,
             'tgl_selesai' => $request->tgl_selesai,
-            'jumlah' => $request->jumlah,
-            'total_harga' => ($request->jumlah * $produk->harga_sewa),
-            'via' => 'Langsung',
-            'status' => 'Proses',
-            'status_pesanan' => 'Selesai',
-            'status_pembayaran' => 'Lunas'
+            'total_harga' => $produk->harga_sewa * $request->jumlah_hari,
+            'jenis_pembayaran' => $request->jenis_pembayaran,
+            'status_pembayaran' => 'Pending',
+            'status_pesanan' => 'Proses',
+            'tanggal' => now()
         ]);
 
-        if ($data) {
-            return response()->json([
-                'status' => true,
-                'message' => 'Sukses Memasukkan Data',
-            ]);
-        } else {
-            return response()->json([
-                'status' => false,
-                'message' => 'Gagal menyimpan data',
-            ]);
+        if ($request->jenis_pembayaran == 'cicilan') {
+            $jumlahCicilan = 2;
+            $nominalCicilan = $totalHarga / $jumlahCicilan;
+
+            for ($i = 1; $i <= $jumlahCicilan; $i++) {
+                Cicilan::create([
+                    'pesanan_id' => $data->id,
+                    'cicilan' => $i,
+                    'total_bayar' => $nominalCicilan,
+                    'status' => 'Pending',
+                ]);
+            }
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        $data = Pesanan::findOrFail($id);
-        return response()->json(['data' => $data], 200);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request)
-    {
-        $id = $request->id;
-        $data = Pesanan::find($id);
-        $produk = Produk::find($request->produk_id);
-
-        if (!$data) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Data Pesanan tidak ditemukan',
-            ]);
-        }
-
-        $data->update([
-            'user_id' => $request->user_id,
-            'produk_id' => $request->produk_id,
-            'tgl_mulai' => $request->tgl_mulai,
-            'tgl_selesai' => $request->tgl_selesai,
-            'jumlah' => $request->jumlah,
-            'total_harga' => ($request->jumlah * $produk->harga_sewa)
-        ]);
 
         if ($data) {
-            return response()->json([
-                'status' => true,
-                'message' => 'Sukses Mengubah Data',
-            ]);
+            $pesanan = Pesanan::with('produk')->find($data->id);
+            return view('landingPage.invoice', compact('pesanan'))->with('success', 'Pesanan Berhasil Dikirim!');
         } else {
-            return response()->json([
-                'status' => false,
-                'message' => 'Gagal Mengubah data',
-            ]);
+            return redirect()->route('landingPage.index')->with('error', 'Pesanan Gagal Dikirim!');
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    public function show(string $id) {}
+
+
+    public function edit(string $id) {}
+
+    public function update(Request $request) {}
+
     public function destroy(string $id)
     {
         $data = Pesanan::find($id);

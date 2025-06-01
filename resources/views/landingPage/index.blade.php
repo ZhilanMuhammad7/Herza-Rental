@@ -65,7 +65,11 @@
         </div>
     </nav>
     <!-- END nav -->
-
+    @if (session('error'))
+        <div class="alert alert-danger mt-3" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="hero-wrap ftco-degree-bg" style="background-image: url('{{ asset('ladingPage/images/bg_1.jpg') }}');"
         data-stellar-background-ratio="0.5">
         <div class="overlay"></div>

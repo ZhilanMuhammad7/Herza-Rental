@@ -42,10 +42,12 @@
                                         <td>{{ $item->no_hp }}</td>
                                         <td>{{ $item->alamat }}</td>
                                         <td>{{ $item->role }}</td>
-                                        <td><a href="javascript:void(0)" onclick="edit('{{ $item->id }}')"><i
-                                                    class="fa fa-edit fs-6 text-info"></i></a>
-                                            <a href="javascript:void(0)" onclick="hapus('{{ $item->id }}')"><i
-                                                    class="fas fa-trash fs-6 text-danger"></i></a>
+                                        <td><a href="javascript:void(0)" onclick="edit('{{ $item->id }}')"
+                                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                                <i class="ki-outline ki-pencil fs-2 text-info"></i></a>
+                                            <a href="javascript:void(0)" onclick="hapus('{{ $item->id }}')"
+                                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                                <i class="ki-outline ki-trash fs-2 text-danger"></i>
                                         </td>
                                     </tr>
                                 @endforeach

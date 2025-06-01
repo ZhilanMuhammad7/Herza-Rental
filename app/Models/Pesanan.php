@@ -8,16 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Pesanan extends Model
 {
     protected $table = 'pesanan';
-    protected $fillable = [
-        "user_id",
-        "produk_id",
-        "tgl_mulai",
-        "tgl_selesai",
-        "jumlah",
-        "total_harga",
-        "via",
-        "status",
-        "status_pesanan",
-        "status_pembayaran"
-    ];
+    protected $guarded = [];
+
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class, 'produk_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function cicilan()
+    {
+        return $this->hasMany(Cicilan::class, 'pesanan_id');
+    }
 }

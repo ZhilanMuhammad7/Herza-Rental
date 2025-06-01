@@ -19,6 +19,7 @@ Route::prefix('/')->group(function () {
     Route::get('/mobil', [LandingPageController::class, 'mobil'])->name('landingPage.mobil');
     Route::get('/profile', [LandingPageController::class, 'profile'])->name('landingPage.profile');
     Route::get('/order', [LandingPageController::class, 'order'])->name('landingPage.order');
+    Route::get('detail_cicilan/{id}', [LandingPageController::class, 'detail_cicilan'])->name('landingPage.detail_cicilan');
     Route::get('/kontak', [LandingPageController::class, 'kontak'])->name('landingPage.kontak');
     Route::get('/invoice', [LandingPageController::class, 'invoice'])->name('landingPage.invoice');
     Route::get('/invoice_cicilan', [LandingPageController::class, 'invoice_cicilan'])->name('landingPage.invoice_cicilan');

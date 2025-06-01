@@ -13,16 +13,17 @@ return new class extends Migration
     {
         Schema::create('pesanan', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('no_pesanan')->unique();
             $table->integer('user_id');
             $table->integer('produk_id');
+            $table->integer('jumlah_hari');
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
-            $table->integer('jumlah');
             $table->integer('total_harga');
-            $table->string('via');
-            $table->string('status');
-            $table->string('status_pesanan');
+            $table->string('jenis_pembayaran');
             $table->string('status_pembayaran');
+            $table->string('status_pesanan');
+            $table->date('tanggal');
             $table->timestamps();
         });
     }

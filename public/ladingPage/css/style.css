@@ -8849,7 +8849,7 @@ h1, h2, h3, h4, h5,
   .table .thead-primary {
     background: transparent; }
     .table .thead-primary tr th {
-      padding: 30px 10px;
+      padding: 10px 5px;
       color: #fff !important;
       border: 1px solid transparent !important; }
       .table .thead-primary tr th.heading {
@@ -8876,7 +8876,7 @@ h1, h2, h3, h4, h5,
         border-color: #343a40 transparent transparent transparent; }
   .table tbody tr td {
     vertical-align: middle;
-    padding: 30px 0;
+    padding: 10px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important; }
     .table tbody tr td.car-image .img {
       display: block;
@@ -8953,12 +8953,7 @@ h1, h2, h3, h4, h5,
         -webkit-transition: all 0.3s ease;
         -ms-transition: all 0.3s ease;
         transition: all 0.3s ease; }
-      .table tbody tr td.price:hover.price {
-        background: #01d28e; }
-      .table tbody tr td.price:hover .btn-custom {
-        opacity: 1; }
-      .table tbody tr td.price:hover .price-rate {
-        opacity: 0; }
+
 
 .ftco-about {
   position: relative;

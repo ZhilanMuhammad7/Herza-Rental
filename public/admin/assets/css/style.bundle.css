@@ -55251,8 +55251,8 @@ code:not([class*=language-]).code-dark {
 }
 
 .badge-info {
-    color: var(--bs-info-inverse);
-    background-color: var(--bs-info)
+    color: white;
+    background-color: #0d6efd
 }
 
 .badge-info.badge-outline {
@@ -55262,8 +55262,8 @@ code:not([class*=language-]).code-dark {
 }
 
 .badge-light-info {
-    background-color: var(--bs-info-light);
-    color: var(--bs-info)
+    background-color: #0d6efd;
+    color: white
 }
 
 .badge-warning {
