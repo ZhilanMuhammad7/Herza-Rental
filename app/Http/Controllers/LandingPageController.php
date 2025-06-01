@@ -35,7 +35,7 @@ class LandingPageController extends Controller
 
     public function order()
     {
-        $id = Auth::user()->id;
+        $id = Auth::user()->id?? null;
         $data = Pesanan::where('user_id', $id)
             ->get();
         return view('landingPage.order', compact('data'));

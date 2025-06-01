@@ -93,7 +93,7 @@
                                         <td class="price">
                                             <div class="price-rate">
                                                 <span class="subheading">@php
-                                                    $statusPembayaranClass = match (strtolower($item->status)) {
+                                                    $statusPembayaranClass = match ($item->status) {
                                                         'Pending' => 'warning',
                                                         'Lunas' => 'success',
                                                         'Ditolak' => 'danger',
@@ -168,7 +168,7 @@
             formData.append('_token', csrfToken);
 
             $.ajax({
-                url: "",
+                url: "{{ route('pesanan.pembayaran_cicilan') }}",
                 type: "POST",
                 data: formData,
                 processData: false,

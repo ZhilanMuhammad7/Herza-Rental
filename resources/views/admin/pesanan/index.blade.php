@@ -41,8 +41,8 @@
                                         @if ($item->jenis_pembayaran == 'cicilan')
                                             Cicilan
                                         @else
-                                            @if ($item->bukti_pembayaran)
-                                                <a href="{{ Storage::url($item->bukti_pembayaran) }}"
+                                            @if ($item->bukti_pembayaran_tunai)
+                                                <a href="{{ Storage::url($item->bukti_pembayaran_tunai) }}"
                                                     class="fw-semibold fs-6 text-primary text-hover-primary"
                                                     target="_blank">File</a>
                                             @else
@@ -62,13 +62,17 @@
                                     <td>
                                         @if ($item->status_pesanan == 'Proses')
                                             <span class="badge badge-info">Proses</span>
-                                        @elseif($item->status_pesanan == 'Lunas')
-                                            <span class="badge badge-success">Lunas</span>
+                                        @elseif($item->status_pesanan == 'Selesai')
+                                            <span class="badge badge-success">Selesai</span>
                                         @else
                                             <span class="badge badge-danger">Ditolak</span>
                                         @endif
                                     </td>
                                     <td>
+                                        <a href="{{ url('pesanan/show/' . Crypt::encryptString($item->id)) }}"
+                                            class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                            <i class="ki-outline ki-information fs-2 text-primary"></i>
+                                        </a>
                                         <a href="javascript:void(0)" onclick="hapus('{{ $item->id }}')"
                                             class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                             <i class="ki-outline ki-trash fs-2 text-danger"></i>

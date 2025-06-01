@@ -89,8 +89,8 @@
                                                         @if ($item->jenis_pembayaran == 'cicilan')
                                                             Cicilan
                                                         @else
-                                                            @if ($item->bukti_pembayaran)
-                                                                <a href="{{ Storage::url($item->bukti_pembayaran) }}"
+                                                            @if ($item->bukti_pembayaran_tunai)
+                                                                <a href="{{ Storage::url($item->bukti_pembayaran_tunai) }}"
                                                                     class="fw-semibold fs-6 text-primary text-hover-primary"
                                                                     target="_blank">File</a>
                                                             @else
@@ -104,7 +104,7 @@
                                                 <div class="price-rate">
                                                     <span class="subheading">@php
                                                         $statusPembayaranClass = match (
-                                                            strtolower($item->status_pembayaran)
+                                                            $item->status_pembayaran
                                                         ) {
                                                             'Pending' => 'warning',
                                                             'Lunas' => 'success',
@@ -123,11 +123,11 @@
                                                     <span class="subheading">
                                                         @php
                                                             $statusPesananClass = match (
-                                                                strtolower($item->status_pesanan)
+                                                                $item->status_pesanan
                                                             ) {
-                                                                'proses' => 'info',
-                                                                'diterima' => 'success',
-                                                                'ditolak' => 'danger',
+                                                                'Proses' => 'info',
+                                                                'Selesai' => 'success',
+                                                                'Ditolak' => 'danger',
                                                                 default => 'secondary',
                                                             };
                                                         @endphp
@@ -140,11 +140,11 @@
                                             <td class="price">
                                                 <div class="price-rate">
                                                     <span class="subheading">
-                                                        @if ($item->jenis_pembayaran == 'tunai' && $item->status_pesanan != 'Selesai')
+                                                        @if ($item->jenis_pembayaran == 'tunai' && $item->status_pembayaran != 'Lunas')
                                                             <a class="btn btn-info btn-sm" href="#"
                                                                 onclick="pembayaran('{{ $item->id }}')">Bayar</a>
                                                         @endif
-                                                        @if ($item->jenis_pembayaran == 'cicilan' && $item->status_pesanan == 'Proses')
+                                                        @if ($item->jenis_pembayaran == 'cicilan' && $item->status_pesanan != 'Ditolak')
                                                             <a class="btn btn-primary btn-sm"
                                                                 href="{{ url('detail_cicilan/' . Crypt::encryptString($item->id)) }}">Detail</a>
                                                         @endif
@@ -205,7 +205,7 @@
             formData.append('_token', csrfToken);
 
             $.ajax({
-                url: "",
+                url: "{{ route('pesanan.bukti_pembayaran') }}",
                 type: "POST",
                 data: formData,
                 processData: false,

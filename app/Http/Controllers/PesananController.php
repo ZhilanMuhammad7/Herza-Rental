@@ -7,6 +7,7 @@ use App\Models\Pesanan;
 use App\Models\Produk;
 use App\Models\Cicilan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class PesananController extends Controller
 {
@@ -32,6 +33,13 @@ class PesananController extends Controller
         $noPesanan = 'INV-' . str_pad($newNumber, 2, '0', STR_PAD_LEFT);
         $totalHarga = $produk->harga_sewa * $request->jumlah_hari;
 
+        if ($request->hasFile('bukti_pembayaran')) {
+            $gambarPath = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
+            $gambar = $gambarPath;
+        } else {
+            $gambar = null;
+        }
+
         $data = Pesanan::create([
             'no_pesanan' => $noPesanan,
             'user_id' => Auth::id(),
@@ -41,6 +49,7 @@ class PesananController extends Controller
             'tgl_selesai' => $request->tgl_selesai,
             'total_harga' => $produk->harga_sewa * $request->jumlah_hari,
             'jenis_pembayaran' => $request->jenis_pembayaran,
+            'bukti_pembayaran_tunai' => $gambar,
             'status_pembayaran' => 'Pending',
             'status_pesanan' => 'Proses',
             'tanggal' => now()
@@ -68,7 +77,67 @@ class PesananController extends Controller
         }
     }
 
-    public function show(string $id) {}
+    public function bukti_pembayaran(Request $request)
+    {
+        $id = $request->id;
+        $data = Pesanan::find($id);
+
+        if ($request->hasFile('bukti_pembayaran')) {
+            $bukti_pembayaranPath = $request->file('bukti_pembayaran')->store('file_pendukung', 'public');
+            $bukti_pembayaran = $bukti_pembayaranPath;
+            $data->update([
+                'bukti_pembayaran_tunai' => $bukti_pembayaran
+            ]);
+        }
+
+        if ($data) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil Menyimpan Data',
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Gagal Menyimpan Data',
+            ]);
+        }
+    }
+
+    public function pembayaran_cicilan(Request $request)
+    {
+        $id = $request->id;
+        $data = Cicilan::find($id);
+
+        if ($request->hasFile('bukti_pembayaran')) {
+            $bukti_pembayaranPath = $request->file('bukti_pembayaran')->store('pembayaran_cicilan', 'public');
+            $bukti_pembayaran = $bukti_pembayaranPath;
+            $data->update([
+                'bukti_bayar' => $bukti_pembayaran,
+                'tanggal_bayar' => now()
+            ]);
+        }
+
+        if ($data) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil Menyimpan Data',
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Gagal Menyimpan Data',
+            ]);
+        }
+    }
+
+    public function show(string $id)
+    {
+        $decryptedId = Crypt::decryptString($id);
+        $pesanan =  Pesanan::find($decryptedId);
+        $cicilan =  Cicilan::where('pesanan_id', $decryptedId)->get();
+
+        return view('admin.pesanan.detail', compact('pesanan', 'cicilan'));
+    }
 
 
     public function edit(string $id) {}

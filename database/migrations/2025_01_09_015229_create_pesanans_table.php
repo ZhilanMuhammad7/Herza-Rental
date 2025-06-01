@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
             $table->integer('total_harga');
+            $table->string('bukti_pembayaran_tunai')->nullable();
             $table->string('jenis_pembayaran');
             $table->string('status_pembayaran');
             $table->string('status_pesanan');

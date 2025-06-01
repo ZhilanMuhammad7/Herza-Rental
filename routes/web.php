@@ -9,7 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PesananController;
-
+use App\Http\Controllers\VerifikasiStatus;
 
 Route::get('/masterUser', [MasterController::class, 'indexUser'])->name('masterUser.indexUser');
 Route::get('/masterAdmin', [MasterController::class, 'indexAdmin'])->name('masterAdmin.indexAdmin');
@@ -57,10 +57,16 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/edit/{id}', [PesananController::class, 'edit'])->name('pesanan.edit');
             Route::post('/update', [PesananController::class, 'update'])->name('pesanan.update');
             Route::delete('/{id}', [PesananController::class, 'destroy'])->name('pesanan.destroy');
+            Route::get('/show/{id}', [PesananController::class, 'show'])->name('pesanan.show');
+            Route::post('/bukti_pembayaran', [PesananController::class, 'bukti_pembayaran'])->name('pesanan.bukti_pembayaran');
+            Route::post('/pembayaran_cicilan', [PesananController::class, 'pembayaran_cicilan'])->name('pesanan.pembayaran_cicilan');
         });
 
-        //Auth
+        // Logout
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+        // Verifikasi Status
+        Route::post('verifikasi-status', VerifikasiStatus::class);
     }
 );
 Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('postlogin');

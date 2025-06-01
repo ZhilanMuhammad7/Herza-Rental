@@ -197,7 +197,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link {{ request()->routeIs('pesanan.index') ? 'active' : '' }}" href="{{ route('pesanan.index') }}">
+                                    <a class="menu-link {{ request()->routeIs('pesanan.*') ? 'active' : '' }}" href="{{ route('pesanan.index') }}">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-abstract-35 fs-2"></i>
                                         </span>
