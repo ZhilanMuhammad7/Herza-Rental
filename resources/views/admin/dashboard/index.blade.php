@@ -6,62 +6,51 @@
                 <h1>Welcome, Owner!</h1>
             </div>
             <div class="col-xxl-12 mb-md-5 mb-xl-12">
-                <div class="row g-5 g-xl-10">
-                    <div class="col-md-6 col-xl-6 mb-xxl-10">
-                        <div class="card overflow-hidden h-md-50 mb-5 mb-xl-10">
-                            <div class="card-body d-flex justify-content-between flex-column px-0 pb-0">
-                                <div class="mb-4 px-9">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1">123</span>
-                                        <span class="badge badge-light-success fs-base">
-                                            <i class="ki-outline ki-arrow-up fs-5 text-success ms-n1"></i>2.2%
-                                        </span>
-                                    </div>
-                                    <span class="fs-6 fw-semibold text-gray-500">Total User</span>
-                                </div>
+                <div class="row g-5 g-xl-8">
+                    <div class="col-xl-4">
+                        <a href="#" class="card bg-success hoverable card-xl-stretch mb-xl-8">
+                            <div class="card-body">
+                                <i class="ki-duotone ki-basket text-white fs-2x ms-n1">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                </i>
+                                <div class="text-white fw-bold fs-2 mb-2 mt-5">Total: {{ $produk }}</div>
+                                <div class="fw-semibold text-white">Jumlah Mobil Tersedia</div>
                             </div>
-                        </div>
-                        <div class="card card-flush h-md-50 mb-xl-10">
-                            <div class="card-header pt-5">
-                                <div class="card-title d-flex flex-column">
-                                    <div class="d-flex align-items-center">
-                                        <span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">2324</span>
-                                        <span class="badge badge-light-success fs-base">
-                                            <i class="ki-outline ki-arrow-up fs-5 text-success ms-n1"></i>2.2%
-                                        </span>
-                                    </div>
-                                    <span class="text-gray-500 pt-1 fw-semibold fs-6">Total Unit</span>
-                                </div>
-                            </div>
-                        </div>
+                        </a>
                     </div>
-                    <div class="col-md-6 col-xl-6 mb-xxl-10">
-                        <div class="card overflow-hidden h-md-50 mb-5 mb-xl-10">
-                            <div class="card-body d-flex justify-content-between flex-column px-0 pb-0">
-                                <div class="mb-4 px-9">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1">2323</span>
-                                        <span class="badge badge-light-success fs-base">
-                                            <i class="ki-outline ki-arrow-up fs-5 text-success ms-n1"></i>2.6%
-                                        </span>
-                                    </div>
-                                    <span class="fs-6 fw-semibold text-gray-500">Total Pemesanan</span>
-                                </div>
+                    <div class="col-xl-4">
+                        <a href="#" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
+                            <div class="card-body">
+                                <i class="ki-duotone ki-cheque text-white fs-2x ms-n1">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
+                                    <span class="path7"></span>
+                                </i>
+                                <div class="text-white fw-bold fs-2 mb-2 mt-5">Total: {{ $pesanan }}</div>
+                                <div class="fw-semibold text-white">Jumlah Sewa Mobil</div>
                             </div>
-                        </div>
-                        <div class="card card-flush h-md-50 mb-xl-10">
-                            <div class="card-header pt-5">
-                                <div class="card-title d-flex flex-column">
-                                    <div class="d-flex align-items-center">
-                                        <span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">2324</span>
-                                        <span class="badge badge-light-success fs-base">
-                                            <i class="ki-outline ki-arrow-up fs-5 text-success ms-n1"></i>2.2%
-                                        </span>
-                                    </div>
-                                    <span class="text-gray-500 pt-1 fw-semibold fs-6">Total Unit</span>
-                                </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-4">
+                        <a href="#" class="card bg-danger hoverable card-xl-stretch mb-5 mb-xl-8">
+                            <div class="card-body">
+                                <i class="ki-duotone ki-chart-simple-3 text-white fs-2x ms-n1">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                </i>
+                                <div class="text-white fw-bold fs-2 mb-2 mt-5">Total : {{ $cicilan }}</div>
+                                <div class="fw-semibold text-white">Jumlah Cicilan Sewa Mobil Belum Lunas</div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
