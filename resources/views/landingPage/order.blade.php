@@ -103,9 +103,7 @@
                                             <td class="price">
                                                 <div class="price-rate">
                                                     <span class="subheading">@php
-                                                        $statusPembayaranClass = match (
-                                                            $item->status_pembayaran
-                                                        ) {
+                                                        $statusPembayaranClass = match ($item->status_pembayaran) {
                                                             'Pending' => 'warning',
                                                             'Lunas' => 'success',
                                                             'Ditolak' => 'danger',
@@ -122,9 +120,7 @@
                                                 <div class="price-rate">
                                                     <span class="subheading">
                                                         @php
-                                                            $statusPesananClass = match (
-                                                                $item->status_pesanan
-                                                            ) {
+                                                            $statusPesananClass = match ($item->status_pesanan) {
                                                                 'Proses' => 'info',
                                                                 'Selesai' => 'success',
                                                                 'Ditolak' => 'danger',
@@ -140,7 +136,11 @@
                                             <td class="price">
                                                 <div class="price-rate">
                                                     <span class="subheading">
-                                                        @if ($item->jenis_pembayaran == 'tunai' && $item->status_pembayaran != 'Lunas')
+                                                        @if (
+                                                            $item->jenis_pembayaran == 'tunai' &&
+                                                                (empty($item->bukti_pembayaran_tunai) ||
+                                                                    (!empty($item->bukti_pembayaran_tunai) && $item->status_pembayaran == 'Ditolak')) &&
+                                                                $item->status_pembayaran != 'Lunas')
                                                             <a class="btn btn-info btn-sm" href="#"
                                                                 onclick="pembayaran('{{ $item->id }}')">Bayar</a>
                                                         @endif

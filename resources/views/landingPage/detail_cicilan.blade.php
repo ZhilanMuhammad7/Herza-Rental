@@ -109,7 +109,7 @@
                                         <td class="price">
                                             <div class="price-rate">
                                                 <span class="subheading">
-                                                    @if ($item->status != 'Lunas')
+                                                    @if ($item->status == 'Ditolak' || empty($item->bukti_bayar))
                                                         <a class="btn btn-info btn-sm" href="#"
                                                             onclick="pembayaran('{{ $item->id }}')">Bayar</a>
                                                     @endif
