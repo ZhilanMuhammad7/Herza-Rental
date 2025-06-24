@@ -31,7 +31,7 @@
                                 <tr>
                                     <td class="ps-4">
                                         {{ $loop->iteration + ($data->currentPage() - 1) * $data->perPage() }}</td>
-                                    <td>{{ $item->user->nama }}</td>
+                                    <td>{{ $item->user->nama}}</td>
                                     <td>{{ $item->produk->nama_mobil }}</td>
                                     <td>{{ $item->jumlah_hari }}</td>
                                     <td>{{ number_format($item->total_harga, 0, ',', '.') }}</span></td>
