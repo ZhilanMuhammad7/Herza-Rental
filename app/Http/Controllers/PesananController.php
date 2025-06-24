@@ -8,6 +8,7 @@ use App\Models\Produk;
 use App\Models\Cicilan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Carbon\Carbon;
 
 class PesananController extends Controller
 {
@@ -40,13 +41,17 @@ class PesananController extends Controller
             $gambar = null;
         }
 
+        $tglMulai = Carbon::parse($request->tgl_mulai);
+        $jumlahHari = (int) $request->jumlah_hari;
+        $tglSelesai = $tglMulai->copy()->addDays($jumlahHari);
+
         $data = Pesanan::create([
             'no_pesanan' => $noPesanan,
             'user_id' => Auth::id(),
             'produk_id' => $request->produk_id,
-            'jumlah_hari' => $request->jumlah_hari,
-            'tgl_mulai' => $request->tgl_mulai,
-            'tgl_selesai' => $request->tgl_selesai,
+            'jumlah_hari' =>  $jumlahHari,
+            'tgl_mulai' => $tglMulai,
+            'tgl_selesai' => $tglSelesai,
             'total_harga' => $produk->harga_sewa * $request->jumlah_hari,
             'jenis_pembayaran' => $request->jenis_pembayaran,
             'bukti_pembayaran_tunai' => $gambar,

@@ -158,11 +158,6 @@
                                                 <input type="date" class="form-control" id="tgl_mulai" name="tgl_mulai">
                                             </div>
                                             <div class="form-group">
-                                                <label>Tanggal Selesai</label>
-                                                <input type="date" class="form-control" id="tgl_selesai"
-                                                    name="tgl_selesai">
-                                            </div>
-                                            <div class="form-group">
                                                 <label for="tipe">Pilih Jenis Pembayaran</label>
                                                 <select class="form-control" id="tipe" name="jenis_pembayaran">
                                                     <option value="">Pilih Pembayaran</option>
