@@ -49,7 +49,7 @@ class LandingPageController extends Controller
         $produk = Produk::find($pesanan->produk_id);
         $data = Cicilan::where('pesanan_id', $decryptedId)
             ->get();
-        return view('landingPage.detail_cicilan', compact('data', 'produk'));
+        return view('landingPage.detail_cicilan', compact('data', 'produk','pesanan'));
     }
 
     public function kontak()

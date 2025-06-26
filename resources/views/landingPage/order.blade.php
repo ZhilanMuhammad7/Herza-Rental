@@ -46,6 +46,7 @@
                                         <th class="bg-dark heading">Bukti Pembayaran</th>
                                         <th class="bg-dark heading">Status Pembayaran</th>
                                         <th class="bg-dark heading">Status Pesanan</th>
+                                        <th class="bg-dark heading">Keterangan</th>
                                         <th class="bg-dark" style="width: 100px">Aksi</th>
                                     </tr>
                                 </thead>
@@ -123,6 +124,7 @@
                                                             $statusPesananClass = match ($item->status_pesanan) {
                                                                 'Proses' => 'info',
                                                                 'Selesai' => 'success',
+                                                                'Diterima' => 'success',
                                                                 'Ditolak' => 'danger',
                                                                 default => 'secondary',
                                                             };
@@ -130,6 +132,17 @@
                                                         <span class="badge badge-{{ $statusPesananClass }} text-white">
                                                             {{ ucfirst($item->status_pesanan) }}
                                                         </span>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td class="price">
+                                                <div class="price-rate">
+                                                    <span class="subheading">
+                                                        @if ($item->catatan)
+                                                            {{ $item->catatan }}
+                                                        @else
+                                                            -
+                                                        @endif
                                                     </span>
                                                 </div>
                                             </td>

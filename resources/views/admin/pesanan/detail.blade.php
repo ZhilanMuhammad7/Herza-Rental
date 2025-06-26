@@ -101,6 +101,7 @@
                                     $statusPesananClass = match ($pesanan->status_pesanan) {
                                         'Proses' => 'info',
                                         'Selesai' => 'success',
+                                        'Diterima' => 'success',
                                         'Ditolak' => 'danger',
                                         default => 'secondary',
                                     };
@@ -122,45 +123,39 @@
                     </div>
                     <div class="card-body p-9">
                         <div class="row mb-7">
-                            <label class="col-lg-4 fw-semibold text-muted">Status Pembayaran
-                            </label>
-                            <div class="col-lg-8">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-light dropdown-toggle" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Verifikasi
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item btn-verifikasi" data-id="{{ $pesanan->id }}"
-                                                data-status="Lunas" data-verifikasi="status_pembayaran"
-                                                data-model="Pesanan">Lunas</a></li>
-                                        <li><a class="dropdown-item btn-verifikasi" data-id="{{ $pesanan->id }}"
-                                                data-status="Ditolak" data-verifikasi="status_pembayaran"
-                                                data-model="Pesanan">Ditolak</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-7">
                             <label class="col-lg-4 fw-semibold text-muted">Status Pesanan</label>
                             <div class="col-lg-8">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-light dropdown-toggle" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Verifikasi
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item btn-verifikasi" data-id="{{ $pesanan->id }}"
-                                                data-status="Ditolak" data-verifikasi="status_pesanan"
-                                                data-model="Pesanan">Ditolak</a>
-                                        </li>
-                                        <li><a class="dropdown-item btn-verifikasi" data-id="{{ $pesanan->id }}"
-                                                data-status="Selesai" data-verifikasi="status_pesanan"
-                                                data-model="Pesanan">Selesai</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                @if ($pesanan->status_pesanan == 'Selesai')
+                                    -
+                                @else
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Verifikasi
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            @if ($pesanan->jenis_pembayaran == 'cicilan' && $pesanan->status_pesanan != 'Diterima')
+                                                <li><a class="dropdown-item btn-verifikasi" data-id="{{ $pesanan->id }}"
+                                                        data-status="Diterima" data-verifikasi="status_pesanan"
+                                                        data-model="Pesanan">Diterima</a></li>
+                                            @elseif($pesanan->jenis_pembayaran == 'cicilan' && $pesanan->status_pesanan == 'Diterima')
+                                                <li><a class="dropdown-item btn-verifikasi" data-id="{{ $pesanan->id }}"
+                                                        data-status="Selesai" data-verifikasi="status_pesanan"
+                                                        data-model="Pesanan">Selesai</a>
+                                                </li>
+                                            @else
+                                                <li><a class="dropdown-item btn-verifikasi" data-id="{{ $pesanan->id }}"
+                                                        data-status="Selesai" data-verifikasi="status_pesanan"
+                                                        data-model="Pesanan">Selesai</a>
+                                                </li>
+                                            @endif
+                                            <li><a class="dropdown-item btn-verifikasi" data-id="{{ $pesanan->id }}"
+                                                    data-status="Ditolak" data-verifikasi="status_pesanan"
+                                                    data-model="Pesanan">Ditolak</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -222,22 +217,29 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <div class="dropdown">
-                                                    <button class="btn btn-sm btn-light dropdown-toggle" type="button"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Verifikasi
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item btn-verifikasi"
-                                                                data-id="{{ $item->id }}" data-status="Lunas"
-                                                                data-verifikasi="status" data-model="Cicilan">Lunas</a>
-                                                        </li>
-                                                        <li><a class="dropdown-item btn-verifikasi"
-                                                                data-id="{{ $item->id }}" data-status="Ditolak"
-                                                                data-verifikasi="status" data-model="Cicilan">Ditolak</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                @if ($pesanan->status_pesanan == 'Selesai')
+                                                    -
+                                                @else
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-sm btn-light dropdown-toggle"
+                                                            type="button" data-bs-toggle="dropdown"
+                                                            aria-expanded="false">
+                                                            Verifikasi
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item btn-verifikasi"
+                                                                    data-id="{{ $item->id }}" data-status="Lunas"
+                                                                    data-verifikasi="status"
+                                                                    data-model="Cicilan">Lunas</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item btn-verifikasi"
+                                                                    data-id="{{ $item->id }}" data-status="Ditolak"
+                                                                    data-verifikasi="status"
+                                                                    data-model="Cicilan">Ditolak</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -248,6 +250,41 @@
                 </div>
             </div>
         @endif
+    </div>
+    <div class="modal fade" id="modalVerifikasi" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mw-650px">
+            <div class="modal-content rounded">
+                <div class="modal-header pb-0 border-0 justify-content-end">
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <i class="ki-outline ki-cross fs-1"></i>
+                    </div>
+                </div>
+                <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                    <form class="form" action="" method="POST" id="formVerifikasi"
+                        enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{{ $pesanan->id }}">
+                        <input type="hidden" name="verifikasi" value="status_pesanan">
+                        <input type="hidden" name="status" value="Ditolak">
+                        <input type="hidden" name="model" value="Pesanan">
+                        <div class="mb-13 text-center">
+                            <h1 class="mb-3">Verifikasi</h1>
+                        </div>
+                        <div class="d-flex flex-column mb-8 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span class="required">Catatan</span>
+                            </label>
+                            <textarea name="catatan" placeholder="Catatan" autocomplete="off" class="form-control bg-transparent"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
+                            <a href="#" onclick="verifikasi()" class="btn btn-primary ">
+                                Simpan
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @section('js')
@@ -261,27 +298,59 @@
             // Status Progres
             $(document).on('click', '.btn-verifikasi', function() {
                 data = $(this).data()
-
-                $.ajax({
-                    type: "post",
-                    url: "{{ url('verifikasi-status') }}",
-                    data: data,
-                    dataType: "json",
-                    success: function(response) {
-                        Swal.fire({
-                            text: "Data Berhasil Disimpan",
-                            icon: "success",
-                            buttonsStyling: false,
-                            confirmButtonText: "OK",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        }).then(function() {
-                            location.reload();
-                        });
-                    }
-                });
+                if (data.status === 'Ditolak') {
+                    $('#modalVerifikasi').modal('show');
+                } else {
+                    $.ajax({
+                        type: "post",
+                        url: "{{ url('verifikasi-status') }}",
+                        data: data,
+                        dataType: "json",
+                        success: function(response) {
+                            Swal.fire({
+                                text: "Data Berhasil Disimpan",
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "OK",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            }).then(function() {
+                                location.reload();
+                            });
+                        }
+                    });
+                }
             });
         });
+
+        function verifikasi() {
+
+            const formData = new FormData($('#formVerifikasi')[0]);
+            const csrfToken = $('meta[name="csrf-token"]').attr('content');
+            formData.append('_token', csrfToken);
+
+            $.ajax({
+                url: "{{ url('verifikasi-status') }}",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: "json",
+                success: function(response) {
+                    Swal.fire({
+                        text: "Data Berhasil Disimpan",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "OK",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    }).then(function() {
+                        location.reload();
+                    });
+                }
+            });
+        }
     </script>
 @endsection
