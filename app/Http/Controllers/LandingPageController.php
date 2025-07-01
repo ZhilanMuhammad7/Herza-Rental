@@ -35,8 +35,8 @@ class LandingPageController extends Controller
 
     public function order()
     {
-        $id = Auth::user()->id?? null;
-        $data = Pesanan::where('user_id', $id)
+        $id = Auth::user()->id ?? null;
+        $data = Pesanan::where('user_id', $id)->orderBy('id', 'desc')
             ->get();
         return view('landingPage.order', compact('data'));
     }
@@ -49,7 +49,7 @@ class LandingPageController extends Controller
         $produk = Produk::find($pesanan->produk_id);
         $data = Cicilan::where('pesanan_id', $decryptedId)
             ->get();
-        return view('landingPage.detail_cicilan', compact('data', 'produk','pesanan'));
+        return view('landingPage.detail_cicilan', compact('data', 'produk', 'pesanan'));
     }
 
     public function kontak()

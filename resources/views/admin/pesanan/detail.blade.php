@@ -39,6 +39,12 @@
                                 {{ $pesanan->tgl_mulai }} s/d {{ $pesanan->tgl_selesai }}
                             </div>
                         </div>
+                        <div class="row mb-7">
+                            <label class="col-lg-6 fw-semibold text-muted">Jam Pengambilan</label>
+                            <div class="col-lg-6">
+                                {{ $pesanan->jam_pengambilan ?? '-' }}
+                            </div>
+                        </div>
                         <div class="row mb-10">
                             <label class="col-lg-6 fw-semibold text-muted">Tanggal Pesan</label>
                             <div class="col-lg-6">

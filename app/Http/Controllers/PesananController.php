@@ -57,6 +57,7 @@ class PesananController extends Controller
             'jumlah_hari' =>  $jumlahHari,
             'tgl_mulai' => $tglMulai,
             'tgl_selesai' => $tglSelesai,
+            'jam_pengambilan' => $request->jam_pengambilan,
             'total_harga' => $produk->harga_sewa * $request->jumlah_hari,
             'jenis_pembayaran' => $request->jenis_pembayaran,
             'bukti_pembayaran_tunai' => $gambar,

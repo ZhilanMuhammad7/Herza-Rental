@@ -43,6 +43,7 @@
                                         <th class="bg-dark heading">Total Bayar</th>
                                         <th class="bg-dark heading">Jenis Pembayaran</th>
                                         <th class="bg-dark heading">Tanggal</th>
+                                        <th class="bg-dark heading">Pengambilan</th>
                                         <th class="bg-dark heading">Bukti Pembayaran</th>
                                         <th class="bg-dark heading">Status Pembayaran</th>
                                         <th class="bg-dark heading">Status Pesanan</th>
@@ -82,6 +83,11 @@
                                             <td class="price">
                                                 <div class="price-rate">
                                                     <span class="subheading">{{ $item->tanggal }}</span>
+                                                </div>
+                                            </td>
+                                            <td class="price">
+                                                <div class="price-rate">
+                                                    <span class="subheading">{{ $item->jam_pengambilan ?? '-' }}</span>
                                                 </div>
                                             </td>
                                             <td class="price">
@@ -180,7 +186,8 @@
                     <h5 class="modal-title" id="bayarModalLabel">Upload Pembayaran</h5>
                 </div>
                 <div class="modal-body">
-                    <form class="form" action="" method="POST" id="formPembayaran" enctype="multipart/form-data">
+                    <form class="form" action="" method="POST" id="formPembayaran"
+                        enctype="multipart/form-data">
                         <input type="hidden" name="id" value="">
                         <div class="mb-3">
                             <label for="bukti_tf" class="form-label">Bukti Pembayaran</label>

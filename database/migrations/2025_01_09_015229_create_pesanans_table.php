@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('jumlah_hari');
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
+            $table->time('jam_pengambilan')->nullable();
             $table->integer('total_harga');
             $table->string('bukti_pembayaran_tunai')->nullable();
             $table->string('jenis_pembayaran');
