@@ -60,6 +60,7 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/show/{id}', [PesananController::class, 'show'])->name('pesanan.show');
             Route::post('/bukti_pembayaran', [PesananController::class, 'bukti_pembayaran'])->name('pesanan.bukti_pembayaran');
             Route::post('/pembayaran_cicilan', [PesananController::class, 'pembayaran_cicilan'])->name('pesanan.pembayaran_cicilan');
+            Route::post('/exportlaporan', [PesananController::class, 'exportLaporan'])->name('pesanan.exportlaporan');
         });
 
         // Logout

@@ -9,6 +9,11 @@ use App\Models\Cicilan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Illuminate\Support\Facades\Response;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 class PesananController extends Controller
 {
@@ -166,5 +171,97 @@ class PesananController extends Controller
             'status' => true,
             'message' => 'Sukses Melakukan delete Data',
         ]);
+    }
+    public function exportlaporan()
+    {
+        $data = Pesanan::where('status_pesanan', 'Selesai')->get();
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A2', 'REKAP SEWA MOBIL HERZA RENTAL');
+        $sheet->mergeCells('A2:G2');
+
+        $sheet->setCellValue('A3', 'No');
+        $sheet->setCellValue('B3', 'Pemesan');
+        $sheet->setCellValue('C3', 'Mobil');
+        $sheet->setCellValue('D3', 'Jumlah Hari');
+        $sheet->setCellValue('E3', 'Total Bayar');
+        $sheet->setCellValue('F3', 'Jenis Pembayaran');
+        $sheet->setCellValue('G3', 'Tanggal Sewa');
+
+        $row = 4;
+        foreach ($data as $index => $item) {
+            $sheet->setCellValue('A' . $row, $index + 1);
+            $sheet->setCellValue('B' . $row, $item->user->nama);
+            $sheet->setCellValue('C' . $row, $item->produk->nama_mobil);
+            $sheet->setCellValue('D' . $row, $item->jumlah_hari);
+            $sheet->setCellValue('E' . $row, $item->total_harga);
+            $sheet->getStyle('E' . $row)
+                ->getNumberFormat()
+                ->setFormatCode('"Rp"#,##0_-');
+            $sheet->setCellValue('F' . $row, $item->jenis_pembayaran);
+            $sheet->setCellValue('G' . $row, $item->tanggal);
+            $row++;
+        }
+
+        $borderStyle = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['rgb' => '000000'],
+                ],
+            ],
+        ];
+
+        $sheet->getStyle('A3:G' . ($row - 1))->applyFromArray($borderStyle);
+        $sheet->getColumnDimension('A')->setWidth(5);
+        $sheet->getColumnDimension('B')->setWidth(20);
+        $sheet->getColumnDimension('C')->setWidth(15);
+        $sheet->getColumnDimension('D')->setWidth(12);
+        $sheet->getColumnDimension('E')->setWidth(15);
+        $sheet->getColumnDimension('F')->setWidth(17);
+        $sheet->getColumnDimension('G')->setWidth(12);
+        $sheet->getStyle('A3:G3')->applyFromArray([
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'color' => [
+                    'rgb' => '4CAF50',
+                ],
+            ],
+            'font' => [
+                'color' => [
+                    'rgb' => 'FFFFFF',
+                ],
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                'wrapText' => true,
+            ],
+        ]);
+
+        $sheet->getStyle('A2:G2')->applyFromArray([
+            'font' => [
+                'size' => 14,
+                'color' => ['rgb' => '000000'],
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                'wrapText' => true,
+            ],
+        ]);
+
+        $filename = 'Rekap_Rental_' . date('d-m-y') . '.xlsx';
+        $writer = new Xlsx($spreadsheet);
+        $filePath = storage_path('app/public/' . $filename);
+        $writer->save($filePath);
+
+        return Response::download($filePath, $filename, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ])->deleteFileAfterSend(true);
     }
 }

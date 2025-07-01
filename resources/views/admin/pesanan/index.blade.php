@@ -7,6 +7,11 @@
                     <span class="card-label fw-bold fs-3 mb-1">Manage Pesanan</span>
                     <span class="text-muted mt-1 fw-semibold fs-7">Pesanan</span>
                 </h3>
+                <div class="card-toolbar">
+                    <a href="#" class="btn btn-sm btn-primary" onclick="exportExcel()">
+                        <i class="fas fa-file-export fs-2"></i>
+                        Export</a>
+                </div>
             </div>
             <div class="card-body py-3">
                 <div class="table-responsive">
@@ -133,6 +138,32 @@
                             Swal.fire("Oops", "Data gagal dihapus!", "error");
                         }
                     });
+                }
+            });
+        }
+
+        function exportExcel() {
+            $.ajax({
+                url: "{{ route('pesanan.exportlaporan') }}",
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function(data, status, xhr) {
+                    const filename = xhr.getResponseHeader('Content-Disposition').split('filename=')[1].replace(
+                        /"/g, '');
+                    const link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(data);
+                    link.download = filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    swal("Oops", "Data gagal disimpan!", "error");
                 }
             });
         }
