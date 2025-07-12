@@ -10,6 +10,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\VerifikasiStatus;
+use App\Http\Controllers\LokasiController;
 
 Route::get('/masterUser', [MasterController::class, 'indexUser'])->name('masterUser.indexUser');
 Route::get('/masterAdmin', [MasterController::class, 'indexAdmin'])->name('masterAdmin.indexAdmin');
@@ -68,6 +69,13 @@ Route::middleware(['custom-auth'])->group(
             Route::post('/pembayaran_cicilan', [PesananController::class, 'pembayaran_cicilan'])->name('pesanan.pembayaran_cicilan');
             Route::post('/exportlaporan', [PesananController::class, 'exportLaporan'])->name('pesanan.exportlaporan');
         });
+
+        // Lokasi
+        Route::prefix('lokasi')->group(function () {
+            Route::get('/', [LokasiController::class, 'index'])->name('lokasi.index');
+            Route::get('/real-time', [LokasiController::class, 'getRealTime'])->name('lokasi.real-time');
+        });
+
 
         // Logout
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
