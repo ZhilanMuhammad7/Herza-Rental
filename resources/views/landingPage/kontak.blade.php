@@ -50,7 +50,7 @@
                 <div class="col-md-12">
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.6621120943296!2d101.4236378750123!3d0.5070075994880298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d5a9006dd3e611%3A0x16fbce94b10662a1!2sJln%20tiung!5e0!3m2!1sid!2sid!4v1751388814424!5m2!1sid!2sid"
+                            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d843.9815700919243!2d101.43028166612474!3d0.5094528890462545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMMKwMzAnMzMuOCJOIDEwMcKwMjUnNTEuMCJF!5e0!3m2!1sid!2sid!4v1751469669933!5m2!1sid!2sid"
                             width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade">
                         </iframe>

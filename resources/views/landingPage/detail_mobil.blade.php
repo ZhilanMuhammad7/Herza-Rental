@@ -180,7 +180,7 @@
                                         <p class="mt-2">Untuk melanjutkan, silakan transfer ke rekening berikut:</p>
                                         <ul class="list-disc pl-5 mt-2">
                                             <li><strong>Bank:</strong> BCA</li>
-                                            <li><strong>No. Rekening:</strong> 1234567890</li>
+                                            <li><strong>No. Rekening:</strong> 2201182524</li>
                                             <li><strong>Atas Nama:</strong> Alif Alprega</li>
                                         </ul>
                                     </div>
