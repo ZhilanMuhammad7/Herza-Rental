@@ -32,6 +32,12 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
         });
 
+        Route::get('/gps-data', function () {
+            $locations = \App\Models\GpsTracking::orderBy('id', 'desc')->get();
+            return response()->json($locations);
+        });
+
+
         // Produk
         Route::prefix('produk')->group(function () {
             Route::get('/', [ProdukController::class, 'index'])->name('produk.index');
