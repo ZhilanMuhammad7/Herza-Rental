@@ -14,15 +14,6 @@ class LokasiController extends Controller
         return view('admin.lokasi.index');
     }
 
-    public function getRealTime()
-    {
-        return response()->json([
-            'latitude' => -6.356745,
-            'longitude' => 106.558606,
-            'detail' => 'Kendaraan A'
-        ]);
-    }
-
     /**
      * Show the form for creating a new resource.
      */
