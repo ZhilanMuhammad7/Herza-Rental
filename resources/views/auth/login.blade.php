@@ -82,13 +82,17 @@
                                     </div>
                                 </div>
                                 @if (session('success'))
-                                    <div class="alert alert-success">
+                                    <div class="alert alert-info">
                                         {{ session('success') }}
                                     </div>
                                 @endif
-                                @if (session('error'))
-                                    <div class="alert alert-danger mt-3" role="alert">
-                                        {{ session('error') }}
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul class="mb-0">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
                                     </div>
                                 @endif
                                 <div class="fv-row mb-8">

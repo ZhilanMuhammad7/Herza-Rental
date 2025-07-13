@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -16,6 +17,19 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
+        $rules = [
+            'email' => 'required',
+            'password' => 'required'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect('/login')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             if (Auth::user()->role == 'admin') {
@@ -23,16 +37,34 @@ class AuthController extends Controller
             } elseif (Auth::user()->role == 'user') {
                 return redirect()->route('landingPage.index');
             } else {
-                return redirect()->route('login')->with('error', 'Email atau password salah!');
+                return redirect('/login')
+                    ->withErrors('Email atau Password Anda Salah')
+                    ->withInput();
             }
         }
-        return redirect()->route('login')->with('error', 'Email atau password salah!');
+        return redirect('/login')
+            ->withErrors('Email atau Password Anda Salah')
+            ->withInput();
     }
     public function postRegister(Request $request)
     {
 
         if (User::where('email', $request->email)->exists()) {
             return redirect()->route('register')->with('error', 'Email sudah pernah didaftarkan');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'no_hp' => 'required',
+            'alamat' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/register')
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $data = new User;

@@ -94,6 +94,9 @@
                                     </label>
                                     <input type="text" placeholder="Nama Lengkap" name="nama" autocomplete="off"
                                         class="form-control bg-transparent" />
+                                    @error('nama')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="fv-row mb-3">
                                     <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
@@ -101,6 +104,9 @@
                                     </label>
                                     <input type="text" placeholder="Email" name="email" autocomplete="off"
                                         class="form-control bg-transparent" />
+                                    @error('email')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="fv-row mb-3">
                                     <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
@@ -108,12 +114,18 @@
                                     </label>
                                     <input type="password" placeholder="Password" name="password" autocomplete="off"
                                         class="form-control bg-transparent" />
+                                    @error('password')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="fv-row mb-3">
                                     <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                         <span class="required">Alamat</span>
                                     </label>
                                     <textarea name="alamat" placeholder="Alamat" autocomplete="off" class="form-control bg-transparent"></textarea>
+                                    @error('alamat')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="fv-row mb-8">
                                     <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
@@ -121,6 +133,9 @@
                                     </label>
                                     <input type="number" placeholder="No Hp" name="no_hp" autocomplete="off"
                                         class="form-control bg-transparent" />
+                                    @error('no_hp')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="d-grid mb-10">
                                     <button type="submit" class="btn btn-primary">
