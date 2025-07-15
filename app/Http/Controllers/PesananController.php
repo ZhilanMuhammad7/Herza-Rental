@@ -14,6 +14,9 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Illuminate\Support\Facades\Response;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
+use Midtrans\Snap;
+use Midtrans\Config;
+use Midtrans\Transaction;
 
 class PesananController extends Controller
 {
@@ -29,21 +32,16 @@ class PesananController extends Controller
         $produk = Produk::find($request->produk_id);
 
         $lastPesanan = Pesanan::orderBy('created_at', 'desc')->first();
-
-        if ($lastPesanan && $lastPesanan->no_pesanan) {
-            $lastNumber = (int) str_replace('INV-', '', $lastPesanan->no_pesanan);
-            $newNumber = $lastNumber + 1;
-        } else {
-            $newNumber = 1;
-        }
+        $newNumber = $lastPesanan && $lastPesanan->no_pesanan
+            ? ((int) str_replace('INV-', '', $lastPesanan->no_pesanan) + 1)
+            : 1;
         $noPesanan = 'INV-' . str_pad($newNumber, 2, '0', STR_PAD_LEFT);
         $totalHarga = $produk->harga_sewa * $request->jumlah_hari;
 
+        $gambar = null;
         if ($request->hasFile('bukti_pembayaran')) {
             $gambarPath = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
             $gambar = $gambarPath;
-        } else {
-            $gambar = null;
         }
 
         $tglMulai = Carbon::parse($request->tgl_mulai);
@@ -54,18 +52,20 @@ class PesananController extends Controller
             'no_pesanan' => $noPesanan,
             'user_id' => Auth::id(),
             'produk_id' => $request->produk_id,
-            'jumlah_hari' =>  $jumlahHari,
+            'jumlah_hari' => $jumlahHari,
             'tgl_mulai' => $tglMulai,
             'tgl_selesai' => $tglSelesai,
             'jam_pengambilan' => $request->jam_pengambilan,
-            'total_harga' => $produk->harga_sewa * $request->jumlah_hari,
+            'total_harga' => $totalHarga,
             'jenis_pembayaran' => $request->jenis_pembayaran,
-            'bukti_pembayaran_tunai' => $gambar,
+            'tujuan_rental' => $request->tujuan_rental,
+            'bukti_pembayaran_tunai' => 'Transfer Bank',
             'status_pembayaran' => 'Pending',
             'status_pesanan' => 'Proses',
             'tanggal' => now()
         ]);
 
+        // Tetap proses cicilan jika jenisnya cicilan
         if ($request->jenis_pembayaran == 'cicilan') {
             $jumlahCicilan = 2;
             $nominalCicilan = $totalHarga / $jumlahCicilan;
@@ -78,15 +78,65 @@ class PesananController extends Controller
                     'status' => 'Pending',
                 ]);
             }
-        }
 
-        if ($data) {
+            // Tampilkan invoice biasa
             $pesanan = Pesanan::with('produk')->find($data->id);
             return view('landingPage.invoice', compact('pesanan'))->with('success', 'Pesanan Berhasil Dikirim!');
-        } else {
-            return redirect()->route('landingPage.index')->with('error', 'Pesanan Gagal Dikirim!');
+        }
+
+        // Jika pakai Midtrans
+        if ($request->jenis_pembayaran == 'Via Midtrans') {
+            $user = Auth::user();
+            $orderId = $data->no_pesanan;
+            // Konfigurasi Snap Token Midtrans
+            $params = [
+                'transaction_details' => [
+                    'order_id' => $orderId,
+                    'gross_amount' => $totalHarga,
+                ],
+                'customer_details' => [
+                    'first_name' => $user->nama,
+                    'email' => $user->email,
+                ],
+            ];
+
+            $snapToken = Snap::getSnapToken($params);
+
+            $pesanan = Pesanan::with('produk')->find($data->id);
+            return view('landingPage.invoice', compact('pesanan', 'snapToken'))->with('success', 'Pesanan Berhasil Dikirim!');
         }
     }
+
+    public function midtransCallback(Request $request)
+    {
+        $notif = new \Midtrans\Notification();
+        $status = $notif->transaction_status;
+        $order_id = $notif->order_id;
+
+        $pesanan = Pesanan::where('no_pesanan', $order_id)->first();
+
+        if (!$pesanan) {
+            return response()->json(['message' => 'Pesanan tidak ditemukan'], 404);
+        }
+
+        if ($status == 'settlement') {
+            $pesanan->update([
+                'status_pembayaran' => 'Lunas',
+                'status_pesanan' => 'Menunggu Konfirmasi',
+            ]);
+        } elseif ($status == 'pending') {
+            $pesanan->update([
+                'status_pembayaran' => 'Pending',
+            ]);
+        } elseif (in_array($status, ['deny', 'cancel', 'expire'])) {
+            $pesanan->update([
+                'status_pembayaran' => 'Gagal',
+            ]);
+        }
+
+        return response()->json(['message' => 'Notifikasi diproses']);
+    }
+
 
     public function bukti_pembayaran(Request $request)
     {

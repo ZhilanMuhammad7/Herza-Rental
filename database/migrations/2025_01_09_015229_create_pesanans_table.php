@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('status_pembayaran');
             $table->string('status_pesanan');
             $table->date('tanggal');
+            $table->string('tujuan_rental');
             $table->text('catatan')->nullable();
             $table->timestamps();
         });

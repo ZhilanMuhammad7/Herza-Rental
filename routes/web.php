@@ -57,6 +57,8 @@ Route::middleware(['custom-auth'])->group(
             Route::delete('/{id}', [UserController::class, 'destroy'])->name('user.destroy');
         });
 
+        Route::post('/pesanan/batal/{id}', [LandingPageController::class, 'batalkanPesanan'])->name('pesanan.batal');
+
         // Pesanan
         Route::prefix('pesanan')->group(function () {
             Route::get('/', [PesananController::class, 'index'])->name('pesanan.index');
@@ -68,6 +70,7 @@ Route::middleware(['custom-auth'])->group(
             Route::post('/bukti_pembayaran', [PesananController::class, 'bukti_pembayaran'])->name('pesanan.bukti_pembayaran');
             Route::post('/pembayaran_cicilan', [PesananController::class, 'pembayaran_cicilan'])->name('pesanan.pembayaran_cicilan');
             Route::post('/exportlaporan', [PesananController::class, 'exportLaporan'])->name('pesanan.exportlaporan');
+            Route::post('/midtrans/callback', [PesananController::class, 'midtransCallback']);
         });
 
         // Lokasi

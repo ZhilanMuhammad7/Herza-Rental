@@ -31,148 +31,142 @@
                 <h2 class="mb-4">Daftar Pesanan</h2>
             </div>
         </div>
-        <div class="row">
-            <div class="ftco-animate">
-                <div class="car-list table-responsive shadow-sm rounded bg-white p-3">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead class="thead-primary">
-                            <tr class="text-center">
-                                <th class="bg-dark heading">No</th>
-                                <th class="bg-dark heading">Produk</th>
-                                <th class="bg-dark heading">Jumlah Hari</th>
-                                <th class="bg-dark heading">Total Bayar</th>
-                                <th class="bg-dark heading">Jenis Pembayaran</th>
-                                <th class="bg-dark heading">Tanggal</th>
-                                <th class="bg-dark heading">Pengambilan</th>
-                                <th class="bg-dark heading">Bukti Pembayaran</th>
-                                <th class="bg-dark heading">Status Pembayaran</th>
-                                <th class="bg-dark heading">Status Pesanan</th>
-                                <th class="bg-dark heading">Keterangan</th>
-                                <th class="bg-dark" style="width: 100px">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data as $item)
-                            <tr class="">
-                                <td class="price">
-                                    <div class="price-rate">
-                                        <span class="subheading">{{ $loop->iteration }}</span>
-                                    </div>
-                                </td>
-                                <td class="price">
-                                    <div class="price-rate">
-                                        <span class="subheading">{{ $item->produk->nama_mobil }}</span>
-                                    </div>
-                                </td>
-                                <td class="price">
-                                    <div class="price-rate">
-                                        <span class="subheading">{{ $item->jumlah_hari }}</span>
-                                    </div>
-                                </td>
-                                <td class="price">
-                                    <div class="price-rate">
-                                        <span class="subheading">Rp
-                                            {{ number_format($item->total_harga, 0, ',', '.') }}</span>
-                                    </div>
-                                </td>
-                                <td class="price">
-                                    <div class="price-rate">
-                                        <span class="subheading">{{ ucfirst($item->jenis_pembayaran) }}</span>
-                                    </div>
-                                </td>
-                                <td class="price">
-                                    <div class="price-rate">
-                                        <span class="subheading">{{ $item->tanggal }}</span>
-                                    </div>
-                                </td>
-                                <td class="price">
-                                    <div class="price-rate">
-                                        <span class="subheading">{{ $item->jam_pengambilan ?? '-' }}</span>
-                                    </div>
-                                </td>
-                                <td class="price">
-                                    <div class="price-rate">
-                                        <span class="subheading">
-                                            @if ($item->jenis_pembayaran == 'cicilan')
-                                            Cicilan
-                                            @else
-                                            @if ($item->bukti_pembayaran_tunai)
-                                            <a href="{{ Storage::url($item->bukti_pembayaran_tunai) }}"
-                                                class="fw-semibold fs-6 text-primary text-hover-primary"
-                                                target="_blank">File</a>
-                                            @else
-                                            -
-                                            @endif
-                                            @endif
-                                        </span>
-                                    </div>
-                                </td>
-                                <td class="price">
-                                    <div class="price-rate">
-                                        <span class="subheading">@php
-                                            $statusPembayaranClass = match ($item->status_pembayaran) {
-                                            'Pending' => 'warning',
-                                            'Lunas' => 'success',
-                                            'Ditolak' => 'danger',
-                                            default => 'secondary',
-                                            };
-                                            @endphp
-                                            <span class="badge badge-{{ $statusPembayaranClass }} text-white">
-                                                {{ ucfirst($item->status_pembayaran) }}
+        <div class="row justify-content-center">
+            <div class="col-md-10 ftco-animate">
+                <div class="car-list shadow-sm rounded bg-white p-3">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover w-100">
+                            <thead class="thead-primary">
+                                <tr class="text-center">
+                                    <th class="bg-dark heading">No</th>
+                                    <th class="bg-dark heading">Produk</th>
+                                    <th class="bg-dark heading">Jumlah Hari</th>
+                                    <th class="bg-dark heading">Bukti Pembayaran</th>
+                                    <th class="bg-dark heading">Status Pembayaran</th>
+                                    <th class="bg-dark heading">Status Pesanan</th>
+                                    <th class="bg-dark heading">Keterangan</th>
+                                    <th class="bg-dark" style="width: 100px">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($data as $item)
+                                <tr class="">
+                                    <td class="price">
+                                        <div class="price-rate">
+                                            <span class="subheading">{{ $loop->iteration }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="price">
+                                        <div class="price-rate">
+                                            <span class="subheading">{{ $item->produk->nama_mobil }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="price">
+                                        <div class="price-rate">
+                                            <span class="subheading">{{ $item->jumlah_hari }} Hari</span>
+                                        </div>
+                                    </td>
+                                    <td class="price">
+                                        <div class="price-rate">
+                                            <span class="subheading">
+                                                @if ($item->jenis_pembayaran == 'cicilan')
+                                                Cicilan
+                                                @elseif ($item->jenis_pembayaran == 'Via Midtrans')
+                                                @if ($item->bukti_pembayaran_tunai)
+                                                {{ $item->bukti_pembayaran_tunai }}
+                                                @else
+                                                Tunai (belum upload bukti)
+                                                @endif
+                                                @else
+                                                -
+                                                @endif
                                             </span>
-                                        </span>
-                                    </div>
-                                </td>
-                                <td class="price">
-                                    <div class="price-rate">
-                                        <span class="subheading">
-                                            @php
-                                            $statusPesananClass = match ($item->status_pesanan) {
-                                            'Proses' => 'info',
-                                            'Selesai' => 'success',
-                                            'Diterima' => 'success',
-                                            'Ditolak' => 'danger',
-                                            default => 'secondary',
-                                            };
-                                            @endphp
-                                            <span class="badge badge-{{ $statusPesananClass }} text-white">
-                                                {{ ucfirst($item->status_pesanan) }}
+                                        </div>
+                                    </td>
+                                    <td class="price">
+                                        <div class="price-rate">
+                                            <span class="subheading">@php
+                                                $statusPembayaranClass = match ($item->status_pembayaran) {
+                                                'Pending' => 'warning',
+                                                'Lunas' => 'success',
+                                                'Ditolak' => 'danger',
+                                                default => 'secondary',
+                                                };
+                                                @endphp
+                                                <span class="badge badge-{{ $statusPembayaranClass }} text-white">
+                                                    {{ ucfirst($item->status_pembayaran) }}
+                                                </span>
                                             </span>
-                                        </span>
-                                    </div>
-                                </td>
-                                <td class="price">
-                                    <div class="price-rate">
-                                        <span class="subheading">
-                                            @if ($item->catatan)
-                                            {{ $item->catatan }}
-                                            @else
-                                            -
-                                            @endif
-                                        </span>
-                                    </div>
-                                </td>
-                                <td class="price">
-                                    <div class="price-rate">
-                                        <span class="subheading">
-                                            @if (
-                                            $item->jenis_pembayaran == 'tunai' &&
-                                            (empty($item->bukti_pembayaran_tunai) ||
-                                            (!empty($item->bukti_pembayaran_tunai) && $item->status_pembayaran == 'Ditolak')) &&
-                                            $item->status_pembayaran != 'Lunas')
-                                            <a class="btn btn-info btn-sm" href="#"
-                                                onclick="pembayaran('{{ $item->id }}')">Bayar</a>
-                                            @endif
-                                            @if ($item->jenis_pembayaran == 'cicilan' && $item->status_pesanan != 'Ditolak')
-                                            <a class="btn btn-primary btn-sm"
-                                                href="{{ url('detail_cicilan/' . Crypt::encryptString($item->id)) }}">Detail</a>
-                                            @endif
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                        </div>
+                                    </td>
+                                    <td class="price">
+                                        <div class="price-rate">
+                                            <span class="subheading">
+                                                @php
+                                                $statusPesananClass = match ($item->status_pesanan) {
+                                                'Proses' => 'info',
+                                                'Selesai' => 'success',
+                                                'Diterima' => 'success',
+                                                'Ditolak' => 'danger',
+                                                default => 'secondary',
+                                                };
+                                                @endphp
+                                                <span class="badge badge-{{ $statusPesananClass }} text-white">
+                                                    {{ ucfirst($item->status_pesanan) }}
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="price">
+                                        <div class="price-rate">
+                                            <span class="subheading">
+                                                @if ($item->catatan)
+                                                {{ $item->catatan }}
+                                                @else
+                                                -
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="price">
+                                        <div class="price-rate">
+                                            <span class="subheading">
+                                                @if (
+                                                $item->jenis_pembayaran == 'Via Midtrans' &&
+                                                (empty($item->bukti_pembayaran_tunai) ||
+                                                (!empty($item->bukti_pembayaran_tunai) && $item->status_pembayaran == 'Ditolak')) &&
+                                                $item->status_pembayaran != 'Lunas'
+                                                )
+                                                <!-- Tombol Bayar dengan ikon -->
+                                                <a class="btn btn-info btn-sm" href="#"
+                                                    onclick="pembayaran('{{ $item->id }}')" title="Bayar">
+                                                    <i class="fas fa-credit-card"></i>
+                                                </a>
+                                                @endif
+
+                                                @if ($item->jenis_pembayaran == 'cicilan' && $item->status_pesanan != 'Ditolak')
+                                                <!-- Tombol Detail Cicilan dengan ikon -->
+                                                <a class="btn btn-primary btn-sm"
+                                                    href="{{ url('detail_cicilan/' . Crypt::encryptString($item->id)) }}"
+                                                    title="Detail Cicilan">
+                                                    <i class="fas fa-file-invoice-dollar"></i>
+                                                </a>
+                                                @endif
+
+                                                <!-- Tombol Detail Pesanan (Modal) dengan ikon -->
+                                                <button type="button" class="btn btn-secondary btn-sm"
+                                                    data-bs-toggle="modal" data-bs-target="#modalDetailPesanan{{ $item->id }}"
+                                                    title="Detail Pesanan">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -206,13 +200,109 @@
     </div>
 </div>
 
+<!-- Modal Detail Pesanan -->
+@foreach ($data as $item)
+<!-- ✅ Modal diletakkan di dalam loop -->
+<div class="modal fade" id="modalDetailPesanan{{ $item->id }}" tabindex="-1" aria-labelledby="modalLabel{{ $item->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content shadow-lg rounded-4">
+            <div class="modal-header bg-white text-dark rounded-top">
+                <h5 class="modal-title" id="modalLabel{{ $item->id }}">
+                    <i class="fas fa-info-circle me-2"></i> Detail Pesanan
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Produk</label>
+                            <input type="text" class="form-control" value="{{ $item->produk->nama_mobil ?? '-' }}" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Jumlah Hari</label>
+                            <input type="text" class="form-control" value="{{ $item->jumlah_hari }} Hari" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Total Bayar</label>
+                            <input type="text" class="form-control" value="Rp {{ number_format($item->total_harga, 0, ',', '.') }}" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Jenis Pembayaran</label>
+                            <input type="text" class="form-control" value="{{ ucfirst($item->jenis_pembayaran) }}" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Tanggal</label>
+                            <input type="text" class="form-control" value="{{ $item->tanggal }}" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Jam Pengambilan</label>
+                            <input type="text" class="form-control" value="{{ $item->jam_pengambilan ?? '-' }}" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Tujuan Rental</label>
+                            <textarea class="form-control" rows="2" disabled>{{ $item->tujuan_rental ?? '-' }}</textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Bukti Pembayaran</label>
+                            @php
+                            $bukti = '-';
+                            if ($item->jenis_pembayaran == 'cicilan') {
+                            $bukti = 'Cicilan';
+                            } elseif ($item->jenis_pembayaran == 'Via Midtrans') {
+                            $bukti = $item->bukti_pembayaran_tunai ?? 'Tunai (belum upload bukti)';
+                            }
+                            @endphp
+                            <input type="text" class="form-control text-end" value="{{ $bukti }}" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Status Pembayaran</label>
+                            <input type="text" class="form-control bg-{{ match($item->status_pembayaran) {
+                                'Pending' => 'warning',
+                                'Lunas' => 'success',
+                                'Ditolak' => 'danger',
+                                default => 'secondary',
+                            } }} text-white" value="{{ ucfirst($item->status_pembayaran) }}" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Status Pesanan</label>
+                            <input type="text" class="form-control bg-{{ match($item->status_pesanan) {
+                                'Proses' => 'info',
+                                'Selesai', 'Diterima' => 'success',
+                                'Ditolak' => 'danger',
+                                default => 'secondary',
+                            } }} text-white" value="{{ ucfirst($item->status_pesanan) }}" disabled>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer bg-light border-0">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i> Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
 @push('css')
-<style>
-    /* Responsive style khusus untuk tabel pesanan */
+<!-- <style>
     .table th,
     .table td {
         vertical-align: middle !important;
         white-space: nowrap;
+        text-align: center;
+    }
+
+    .fixed-table-layout {
+        table-layout: fixed;
+        width: 100%;
+        word-wrap: break-word;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
     }
 
     @media (max-width: 768px) {
@@ -239,7 +329,7 @@
         padding: 1rem;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     }
-</style>
+</style> -->
 @endpush
 
 @endsection

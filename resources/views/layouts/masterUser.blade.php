@@ -28,6 +28,11 @@
     <link rel="stylesheet" href="{{ asset('ladingPage/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('ladingPage/css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('ladingPage/css/style.css') }}">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-SOMEHASH" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap JS (wajib untuk modal) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     @stack('css')
 </head>
 

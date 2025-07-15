@@ -73,4 +73,16 @@ class LandingPageController extends Controller
     {
         return view('landingPage.invoice_cicilan');
     }
+
+    public function batalkanPesanan($id)
+    {
+        $pesanan = Pesanan::find($id);
+
+        if ($pesanan && $pesanan->status_pembayaran === 'Pending') {
+            $pesanan->delete();
+            return response()->json(['message' => 'Pesanan dibatalkan']);
+        }
+
+        return response()->json(['message' => 'Pesanan tidak ditemukan atau sudah dibayar'], 404);
+    }
 }

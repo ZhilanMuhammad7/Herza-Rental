@@ -177,18 +177,23 @@
                                     </div>
 
                                     <div class="form-group mb-3">
+                                        <label for="jam_pengambilan" class="form-label">Tujuan Rental</label>
+                                        <input type="text" class="form-control" name="tujuan_rental" placeholder="Masukkan Tujuan Rental">
+                                    </div>
+
+                                    <div class="form-group mb-3">
                                         <label for="tipe" class="form-label">Pilih Jenis Pembayaran</label>
                                         <select class="form-control" id="tipe" name="jenis_pembayaran">
                                             <option value="">Pilih Pembayaran</option>
-                                            <option value="tunai">Tunai</option>
+                                            <option value="Via Midtrans">Via Midtrans</option>
                                             <option value="cicilan">Cicilan</option>
                                         </select>
                                     </div>
 
-                                    <div class="form-group mb-3" id="uploadFile" style="display: none;">
+                                    <!-- <div class="form-group mb-3" id="uploadFile" style="display: none;">
                                         <label for="bukti" class="form-label">Upload Bukti Pembayaran</label>
                                         <input type="file" class="form-control" id="bukti" name="bukti_pembayaran">
-                                    </div>
+                                    </div> -->
 
                                     <div id="norek" style="display: none;" class="alert alert-warning mb-3">
                                         <p class="fw-bold mb-1">Terima kasih atas pesanan Anda</p>
@@ -204,7 +209,7 @@
                                         <label class="form-label">Cicilan akan dibayarkan dalam 2 tahap, berdasarkan total harga produk ditambah durasi sewa mobil (jumlah hari).</label>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary mt-3">Pesan Sekarang</button>
+                                    <button type="submit" class="btn btn-primary mt-3">Buat Pesanan</button>
                                 </form>
                                 @else
                                 <div class="alert alert-warning text-center mt-4" role="alert">
@@ -223,9 +228,9 @@
 <script>
     const jumlahHariInput = document.querySelector('input[name="jumlah_hari"]');
     const tipeSelect = document.getElementById("tipe");
-    const uploadDiv = document.getElementById("uploadFile");
+    // const uploadDiv = document.getElementById("uploadFile");
     const cicilanDiv = document.getElementById("cicilan");
-    const norekDiv = document.getElementById("norek"); // <- ini sebelumnya typo: noreknDiv
+    const norekDiv = document.getElementById("norek");
 
     tipeSelect.disabled = true;
 
@@ -236,7 +241,7 @@
             tipeSelect.disabled = false;
 
             tipeSelect.innerHTML = '<option value="">Pilih Pembayaran</option>';
-            tipeSelect.innerHTML += '<option value="tunai">Tunai</option>';
+            tipeSelect.innerHTML += '<option value="Via Midtrans">Via Midtrans</option>';
 
             if (jumlahHari >= 7) {
                 tipeSelect.innerHTML += '<option value="cicilan">Cicilan</option>';
@@ -245,7 +250,7 @@
         } else {
             tipeSelect.disabled = true;
             tipeSelect.value = "";
-            uploadDiv.style.display = "none";
+            // uploadDiv.style.display = "none";
             cicilanDiv.style.display = "none";
             norekDiv.style.display = "none";
         }
@@ -254,18 +259,18 @@
     tipeSelect.addEventListener("change", function() {
         const value = this.value;
 
-        if (value === "tunai") {
-            uploadDiv.style.display = "block";
-            cicilanDiv.style.display = "none";
-            norekDiv.style.display = "block"; // tampilkan norek saat tunai
-        } else if (value === "cicilan") {
-            uploadDiv.style.display = "none";
-            cicilanDiv.style.display = "block";
-            norekDiv.style.display = "block"; // tampilkan norek saat cicilan
-        } else {
-            uploadDiv.style.display = "none";
+        if (value === "Via Midtrans") {
+            // uploadDiv.style.display = "block";
             cicilanDiv.style.display = "none";
             norekDiv.style.display = "none";
+        } else if (value === "cicilan") {
+            // uploadDiv.style.display = "none";
+            cicilanDiv.style.display = "block";
+            norekDiv.style.display = "block";
+        } else {
+            // uploadDiv.style.display = "none";
+            cicilanDiv.style.display = "none";
+            norekDiv.style.display = "block";
         }
     });
 </script>
@@ -277,6 +282,7 @@
         const tglMulai = document.querySelector('input[name="tgl_mulai"]');
         const jamAmbil = document.querySelector('input[name="jam_pengambilan"]');
         const jenisBayar = document.querySelector('select[name="jenis_pembayaran"]');
+        const tujuanRental = document.querySelector('select[name="tujuan_rental"]');
         const bukti = document.querySelector('input[name="bukti_pembayaran"]');
 
         let isValid = true;
@@ -302,8 +308,13 @@
             message += "- Jenis Pembayaran belum dipilih\n";
         }
 
+        if (!tujuanRental.value.trim()) {
+            isValid = false;
+            message += "- Tujuan Rental belum diisi\n";
+        }
+
         // Jika pembayaran cicilan/tunai, tapi bukti pembayaran belum diupload
-        if ((jenisBayar.value === "tunai") && !bukti.value.trim()) {
+        if ((jenisBayar.value === "Via Midtrans") && !bukti.value.trim()) {
             isValid = false;
             message += "- Bukti Pembayaran belum diupload\n";
         }

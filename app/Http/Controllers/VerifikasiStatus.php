@@ -20,6 +20,8 @@ class VerifikasiStatus extends Controller
             $data['catatan'] = $request->catatan ?? null;
             if ($request->status == 'Selesai') {
                 $data['status_pembayaran'] = 'Lunas';
+            } elseif ($request->status == 'Ditolak') {
+                $data['status_pembayaran'] = 'Ditolak';
             }
         } else {
             $data['status'] = $request->status;
