@@ -50,15 +50,15 @@
                     <li class="nav-item {{ request()->routeIs('landingPage.order') ? 'active' : '' }}"><a
                             href="{{ route('landingPage.order') }}" class="nav-link">Pesanan</a></li>
                     @auth
-                        @if (auth()->user()->role == 'user')
-                            <li class="nav-item {{ request()->routeIs('landingPage.profile') ? 'active' : '' }}"><a
-                                    href="{{ route('landingPage.profile') }}" class="nav-link">Profile</a></li>
-                        @endif
+                    @if (auth()->user()->role == 'user')
+                    <li class="nav-item {{ request()->routeIs('landingPage.profile') ? 'active' : '' }}"><a
+                            href="{{ route('landingPage.profile') }}" class="nav-link">Profile</a></li>
+                    @endif
                     @endauth
                     @if (Auth::check())
-                        <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link">Keluar</a></li>
+                    <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link">Keluar</a></li>
                     @else
-                        <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Masuk</a></li>
+                    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Masuk</a></li>
                     @endif
                 </ul>
             </div>
@@ -66,9 +66,9 @@
     </nav>
     <!-- END nav -->
     @if (session('error'))
-        <div class="alert alert-danger mt-3" role="alert">
-            {{ session('error') }}
-        </div>
+    <div class="alert alert-danger mt-3" role="alert">
+        {{ session('error') }}
+    </div>
     @endif
     <div class="hero-wrap ftco-degree-bg" style="background-image: url('{{ asset('ladingPage/images/bg_1.jpg') }}');"
         data-stellar-background-ratio="0.5">
@@ -97,27 +97,40 @@
                 <div class="col-md-12">
                     <div class="carousel-car owl-carousel">
                         @foreach ($produk as $value)
-                            <div class="item">
-                                <div class="car-wrap rounded ftco-animate">
-                                    <div class="img rounded d-flex align-items-end"
-                                        style="background-image: url('{{ Storage::url($value->foto) }}');">
-                                    </div>
-                                    <div class="text">
-                                        <h2 class="mb-0"><a href="#">{{ $value->nama_mobil }}
-                                                {{ $value->tahun }}</a></h2>
-                                        <div class="d-flex mb-3">
-                                            <span class="cat">{{ $value->jenis_mobil }}</span>
-                                            <p class="price ml-auto">
-                                                {{ isset($value->harga_sewa) ? 'Rp ' . number_format($value->harga_sewa, 0, ',', '.') : 'Rp 0' }}
-                                            </p>
-                                        </div>
-                                        <p class="d-flex mb-0 d-block">
-                                            <a href="{{ url('detail_mobil/' . Crypt::encryptString($value->id)) }}"
-                                                class="btn btn-secondary py-2 ml-1">Detail</a>
+                        <div class="item">
+                            <div class="car-wrap rounded ftco-animate">
+                                <div class="img rounded d-flex align-items-end"
+                                    style="background-image: url('{{ Storage::url($value->foto) }}');">
+                                    {{-- Badge Status Mobil --}}
+                                    <span class="badge position-absolute top-0 start-0 m-2 
+                                        @if ($value->status == 'Tersedia')
+                                            bg-success text-white
+                                        @elseif ($value->status == 'Disewa')
+                                            bg-warning text-white
+                                        @elseif ($value->status == 'Maintenance')
+                                            bg-danger text-white
+                                        @else
+                                            bg-secondary
+                                        @endif">
+                                        {{ $value->status }}
+                                    </span>
+                                </div>
+                                <div class="text">
+                                    <h2 class="mb-0"><a href="#">{{ $value->nama_mobil }}
+                                            {{ $value->tahun }}</a></h2>
+                                    <div class="d-flex mb-3">
+                                        <span class="cat">{{ $value->jenis_mobil }}</span>
+                                        <p class="price ml-auto">
+                                            {{ isset($value->harga_sewa) ? 'Rp ' . number_format($value->harga_sewa, 0, ',', '.') : 'Rp 0' }}
                                         </p>
                                     </div>
+                                    <p class="d-flex mb-0 d-block">
+                                        <a href="{{ url('detail_mobil/' . Crypt::encryptString($value->id)) }}"
+                                            class="btn btn-secondary py-2 ml-1">Detail</a>
+                                    </p>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>

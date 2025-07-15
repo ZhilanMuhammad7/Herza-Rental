@@ -47,7 +47,7 @@ class UserController extends Controller
             'alamat' => $request->alamat,
             'email' => $request->email,
             'password' => Hash::make($request->input('password')),
-            'role' => 'user'
+            'role' => 'admin'
         ]);
 
         if ($data) {

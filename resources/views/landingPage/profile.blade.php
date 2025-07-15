@@ -22,7 +22,7 @@
                 <div class="row align-items-center">
                     <!-- Foto Profil -->
                     <div class="col-md-4 text-center mb-4 mb-md-0">
-                        <img src="{{ asset('ladingPage/images/person_1.jpg') }}" alt="Foto Profil"
+                        <img src="{{ asset('ladingPage/images/blank.png') }}" alt="Foto Profil"
                             class="img-fluid rounded-circle shadow-sm"
                             style="width: 150px; height: 150px; object-fit: cover;">
                         <h4 class="mt-3">{{ $user->nama }}</h4>

@@ -20,17 +20,29 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="car-details">
-                    <div style="display: flex; justify-content: center; margin-top: 20px;">
+                    <div style="display: flex; justify-content: center; margin-top: 20px; position: relative;">
                         <div class="img rounded"
                             style="background-image: url('{{ Storage::url($produk->foto) }}');
-                                    width: 450px;
-                                    height: 350px;
-                                    background-size: contain;
-                                    background-repeat: no-repeat;
-                                    background-position: center;">
+                            width: 450px;
+                            height: 350px;
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-position: center;">
                         </div>
                     </div>
-
+                    {{-- Badge Status Mobil --}}
+                    <span class="badge position-absolute top-0 start-0 m-2 
+                            @if ($produk->status == 'Tersedia')
+                                bg-success text-white
+                            @elseif ($produk->status == 'Disewa')
+                                bg-warning text-white
+                            @elseif ($produk->status == 'Maintenance')
+                                bg-danger text-white
+                            @else
+                                bg-secondary
+                            @endif">
+                        {{ $produk->status }}
+                    </span>
                     <div class="text text-center">
                         <span class="subheading">{{ $produk->jenis_mobil }}</span>
                         <h2>{{ $produk->nama_mobil }} {{ $produk->tahun }}</h2>
@@ -138,59 +150,67 @@
                                 @endguest
 
                                 @auth
+                                @if ($produk->status == 'Tersedia')
                                 <h3 class="head mb-4">Formulir Pemesanan</h3>
-                                <form class="form" action="{{ route('pesanan.store') }}" method="POST"
-                                    id="formPesan" enctype="multipart/form-data">
+                                <form class="form" action="{{ route('pesanan.store') }}" method="POST" id="formPesan" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="produk_id" value="{{ $produk->id }}">
-                                    <div class="form-group">
-                                        <label for="nama">Nama</label>
-                                        <input type="text" class="form-control" id="nama"
-                                            value="{{ Auth::user()->nama }}" disabled>
+
+                                    <div class="form-group mb-3">
+                                        <label for="nama" class="form-label">Nama</label>
+                                        <input type="text" class="form-control" id="nama" value="{{ Auth::user()->nama }}" disabled>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Jumlah Hari</label>
-                                        <input type="number" class="form-control" name="jumlah_hari"
-                                            placeholder="Jumlah Hari" min="1">
+
+                                    <div class="form-group mb-3">
+                                        <label for="jumlah_hari" class="form-label">Jumlah Hari</label>
+                                        <input type="number" class="form-control" name="jumlah_hari" placeholder="Jumlah Hari" min="1" required>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Tanggal Mulai</label>
-                                        <input type="date" class="form-control" id="tgl_mulai" name="tgl_mulai">
+
+                                    <div class="form-group mb-3">
+                                        <label for="tgl_mulai" class="form-label">Tanggal Mulai</label>
+                                        <input type="date" class="form-control" id="tgl_mulai" name="tgl_mulai" required min="{{ date('Y-m-d') }}">
                                     </div>
-                                    <div class="form-group">
-                                        <label>Jam Pengambilan</label>
-                                        <input type="time" class="form-control" name="jam_pengambilan"
-                                            placeholder="Jam Pengambilan">
+
+                                    <div class="form-group mb-3">
+                                        <label for="jam_pengambilan" class="form-label">Jam Pengambilan</label>
+                                        <input type="time" class="form-control" name="jam_pengambilan" placeholder="Masukkan jam pengambilan">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="tipe">Pilih Jenis Pembayaran</label>
+
+                                    <div class="form-group mb-3">
+                                        <label for="tipe" class="form-label">Pilih Jenis Pembayaran</label>
                                         <select class="form-control" id="tipe" name="jenis_pembayaran">
                                             <option value="">Pilih Pembayaran</option>
                                             <option value="tunai">Tunai</option>
                                             <option value="cicilan">Cicilan</option>
                                         </select>
                                     </div>
-                                    <div class="form-group" id="uploadFile" style="display: none;">
-                                        <label for="bukti">Upload Bukti Pembayaran</label>
-                                        <input type="file" class="form-control" id="bukti"
-                                            name="bukti_pembayaran">
+
+                                    <div class="form-group mb-3" id="uploadFile" style="display: none;">
+                                        <label for="bukti" class="form-label">Upload Bukti Pembayaran</label>
+                                        <input type="file" class="form-control" id="bukti" name="bukti_pembayaran">
                                     </div>
-                                    <div id="norek" style="display: none;" class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded mb-4">
-                                        <p class="font-semibold">Terima kasih atas pesanan Anda</p>
-                                        <p class="mt-2">Untuk melanjutkan, silakan transfer ke rekening berikut:</p>
-                                        <ul class="list-disc pl-5 mt-2">
+
+                                    <div id="norek" style="display: none;" class="alert alert-warning mb-3">
+                                        <p class="fw-bold mb-1">Terima kasih atas pesanan Anda</p>
+                                        <p class="mb-2">Untuk melanjutkan, silakan transfer ke rekening berikut:</p>
+                                        <ul class="mb-0 ps-3">
                                             <li><strong>Bank:</strong> BCA</li>
                                             <li><strong>No. Rekening:</strong> 2201182524</li>
                                             <li><strong>Atas Nama:</strong> Alif Alprega</li>
                                         </ul>
                                     </div>
 
-                                    <div class="form-group" id="cicilan" style="display: none;">
-                                        <label>Cicilan akan dibayarkan dalam 2 tahap, berdasarkan total harga produk
-                                            ditambah durasi sewa mobil (jumlah hari).</label>
+                                    <div class="form-group mb-3" id="cicilan" style="display: none;">
+                                        <label class="form-label">Cicilan akan dibayarkan dalam 2 tahap, berdasarkan total harga produk ditambah durasi sewa mobil (jumlah hari).</label>
                                     </div>
+
                                     <button type="submit" class="btn btn-primary mt-3">Pesan Sekarang</button>
                                 </form>
+                                @else
+                                <div class="alert alert-warning text-center mt-4" role="alert">
+                                    Mobil ini saat ini <strong>{{ strtolower($produk->status) }}</strong> dan tidak dapat dipesan.
+                                </div>
+                                @endif
                                 @endauth
                             </div>
                         </div>
@@ -249,4 +269,50 @@
         }
     });
 </script>
+
+<script>
+    document.getElementById('formPesan').addEventListener('submit', function(e) {
+        // Ambil semua input wajib
+        const jumlahHari = document.querySelector('input[name="jumlah_hari"]');
+        const tglMulai = document.querySelector('input[name="tgl_mulai"]');
+        const jamAmbil = document.querySelector('input[name="jam_pengambilan"]');
+        const jenisBayar = document.querySelector('select[name="jenis_pembayaran"]');
+        const bukti = document.querySelector('input[name="bukti_pembayaran"]');
+
+        let isValid = true;
+        let message = "";
+
+        if (!jumlahHari.value.trim()) {
+            isValid = false;
+            message += "- Jumlah Hari belum diisi\n";
+        }
+
+        if (!tglMulai.value.trim()) {
+            isValid = false;
+            message += "- Tanggal Mulai belum diisi\n";
+        }
+
+        if (!jamAmbil.value.trim()) {
+            isValid = false;
+            message += "- Jam Pengambilan belum diisi\n";
+        }
+
+        if (!jenisBayar.value.trim()) {
+            isValid = false;
+            message += "- Jenis Pembayaran belum dipilih\n";
+        }
+
+        // Jika pembayaran cicilan/tunai, tapi bukti pembayaran belum diupload
+        if ((jenisBayar.value === "tunai") && !bukti.value.trim()) {
+            isValid = false;
+            message += "- Bukti Pembayaran belum diupload\n";
+        }
+
+        if (!isValid) {
+            e.preventDefault(); // Hentikan pengiriman form
+            alert("Harap lengkapi data berikut:\n\n" + message); // Tampilkan popup alert
+        }
+    });
+</script>
+
 @endsection
