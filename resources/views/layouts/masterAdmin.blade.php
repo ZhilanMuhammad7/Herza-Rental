@@ -232,7 +232,7 @@
                                     <a class="menu-link {{ request()->routeIs('user.index') ? 'active' : '' }}"
                                         href="{{ route('user.index') }}">
                                         <span class="menu-icon">
-                                            <i class="ki-outline ki-gift fs-2"></i>
+                                            <i class="ki-outline ki-user fs-2"></i>
                                         </span>
                                         <span class="menu-title">Data User</span>
                                     </a>
