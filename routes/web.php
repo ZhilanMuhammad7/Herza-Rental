@@ -71,6 +71,7 @@ Route::middleware(['custom-auth'])->group(
             Route::post('/pembayaran_cicilan', [PesananController::class, 'pembayaran_cicilan'])->name('pesanan.pembayaran_cicilan');
             Route::post('/exportlaporan', [PesananController::class, 'exportLaporan'])->name('pesanan.exportlaporan');
             Route::post('/midtrans/callback', [PesananController::class, 'midtransCallback']);
+            Route::post('/read', [PesananController::class, 'pesananRead'])->name('pesanan.read');
         });
 
         // Lokasi

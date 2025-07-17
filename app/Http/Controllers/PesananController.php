@@ -315,4 +315,17 @@ class PesananController extends Controller
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         ])->deleteFileAfterSend(true);
     }
+    public function pesananRead()
+    {
+        Pesanan::where('read_notif', '!=', '2')->update([
+            'read_notif' => 2
+        ]);
+        $unreadNotificationsCount = Pesanan::where('status_pesanan', 'Proses')->where('read_notif', '!=', '2')->count();
+        $notifications = Pesanan::with('produk')->where('status_pesanan', 'Proses')->where('read_notif', '!=', '2')->orderBy('created_at', 'desc')->get();
+        return response()->json([
+            'status' => 'success',
+            'unreadNotificationsCount' => $unreadNotificationsCount,
+            'notifications' => $notifications,
+        ]);
+    }
 }

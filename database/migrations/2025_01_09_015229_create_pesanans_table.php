@@ -28,6 +28,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('tujuan_rental');
             $table->text('catatan')->nullable();
+            $table->integer('read_notif')->default(1)->nullable();
             $table->timestamps();
         });
     }

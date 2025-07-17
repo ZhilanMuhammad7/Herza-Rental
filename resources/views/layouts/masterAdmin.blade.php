@@ -121,6 +121,67 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="app-navbar-item ms-1 ms-md-3">
+                            <div class="btn btn-icon btn-custom btn-color-gray-600 btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px position-relative"
+                                id="kt_drawer_chat_toggle">
+                                <i class="ki-outline ki-notification-on fs-1"></i>
+                                <span id="notification-count"
+                                    class="position-absolute top-0 start-100 translate-middle badge badge-circle badge-danger w-15px h-15px ms-n4 mt-3">{{ $unreadNotificationsCount }}</span>
+                            </div>
+                        </div>
+                        <div id="kt_drawer_chat" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="chat"
+                            data-kt-drawer-activate="true" data-kt-drawer-overlay="false"
+                            data-kt-drawer-width="{default:'300px', 'md': '500px'}" data-kt-drawer-direction="end"
+                            data-kt-drawer-toggle="#kt_drawer_chat_toggle"
+                            data-kt-drawer-close="#kt_drawer_chat_close">
+                            <div class="card w-100 border-0 rounded-0" id="kt_drawer_chat_messenger">
+                                <div class="card-header pe-5" id="kt_drawer_chat_messenger_header">
+                                    <div class="card-title">
+                                        <div class="d-flex justify-content-center flex-column me-3">
+                                            <a href="#"
+                                                class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 mb-2 lh-1">Notifikasi</a>
+                                            <div class="mb-0 lh-1">
+                                                <span
+                                                    class="badge badge-success badge-circle w-10px h-10px me-1"></span>
+                                                <span class="fs-7 fw-semibold text-muted">New</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-toolbar">
+                                        <div class="btn btn-sm btn-icon btn-active-color-primary"
+                                            id="kt_drawer_chat_close">
+                                            <i class="ki-outline ki-cross-square fs-2"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body" id="kt_drawer_chat_messenger_body">
+                                    <div class="scroll-y me-n5 pe-5" data-kt-element="messages" data-kt-scroll="true"
+                                        data-kt-scroll-activate="true" data-kt-scroll-height="auto"
+                                        data-kt-scroll-dependencies="#kt_drawer_chat_messenger_header, #kt_drawer_chat_messenger_footer"
+                                        data-kt-scroll-wrappers="#kt_drawer_chat_messenger_body"
+                                        data-kt-scroll-offset="0px">
+                                        @foreach ($notifications as $notification)
+                                            <div class="d-flex justify-content-start mb-10">
+                                                <div class="d-flex flex-column align-items-start">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <div class="ms-3">
+                                                            <i class="ki-outline ki-send fs-3"></i>
+                                                            <a href="#"
+                                                                class="fs-5 fw-bold text-gray-900 text-hover-primary me-1">Pesanan
+                                                                Baru Masuk: Mobil
+                                                                {{ $notification->produk->nama_mobil }}, Di Pesan Oleh:
+                                                                {{ $notification->user->nama }}</a>
+                                                            <span
+                                                                class="text-muted fs-7 mb-1">{{ $notification->created_at }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="app-navbar-item ms-1 ms-md-3" id="kt_header_user_menu_toggle">
                             <div class="cursor-pointer symbol symbol-circle symbol-35px symbol-md-45px"
                                 data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
@@ -156,7 +217,7 @@
             <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
                 <div id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true"
                     data-kt-drawer-name="app-sidebar" data-kt-drawer-activate="{default: true, lg: false}"
-                    data-kt-drawer-overlay="true" data-kt-drawer-width="250px" data-kt-drawer-direction="start"
+                    data-kt-drawer-overlay="false" data-kt-drawer-width="250px" data-kt-drawer-direction="start"
                     data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
                     <div class="app-sidebar-header d-flex flex-stack d-none d-lg-flex pt-8 pb-2"
                         id="kt_app_sidebar_header">
@@ -221,7 +282,8 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link {{ request()->routeIs('lokasi.*') ? 'active' : '' }}" href="{{ route('lokasi.index') }}">
+                                    <a class="menu-link {{ request()->routeIs('lokasi.*') ? 'active' : '' }}"
+                                        href="{{ route('lokasi.index') }}">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-pin fs-2"></i>
                                         </span>
@@ -320,6 +382,70 @@
     <script src="{{ asset('admin/assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
     <script src="{{ asset('admin/assets/js/custom/utilities/modals/users-search.js') }}"></script>
     <script src="{{ asset('admin/assets/js/custom/utilities/modals/create-campaign.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('#kt_drawer_chat_toggle').on('click', function() {
+                $.ajax({
+                    url: "{{ route('pesanan.read') }}",
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            $('#notification-count').text(response.unreadNotificationsCount);
+                            $('#kt_drawer_chat').addClass('show');
+                        } else {
+                            alert('Gagal memperbarui status notifikasi.');
+                        }
+                    },
+                    error: function() {
+                        alert('Terjadi kesalahan. Coba lagi.');
+                    }
+                });
+            });
+            $('#kt_drawer_chat_close').on('click', function() {
+                $.ajax({
+                    url: "{{ route('pesanan.read') }}",
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            $('#notification-count').text(response.unreadNotificationsCount);
+                            $('#kt_drawer_chat_messenger_body .scroll-y').empty();
+
+                            // Loop data notifikasi dari response
+                            response.notifications.forEach(function(notification) {
+                                $('#kt_drawer_chat_messenger_body .scroll-y').append(`
+                                <div class="d-flex justify-content-start mb-10">
+                                    <div class="d-flex flex-column align-items-start">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="ms-3">
+                                                <i class="ki-outline ki-send fs-3"></i>
+                                                <a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary me-1">
+                                                    Pesanan Baru Masuk: Mobil ${notification.produk.nama_mobil},
+                                                    Di Pesan Oleh: ${notification.user.nama}
+                                                </a>
+                                                <span class="text-muted fs-7 mb-1">${notification.created_at}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `);
+                            });
+                            $('#kt_drawer_chat').addClass('show');
+                        } else {
+                            alert('Gagal memperbarui status notifikasi.');
+                        }
+                    },
+                    error: function() {
+                        alert('Terjadi kesalahan. Coba lagi.');
+                    }
+                });
+            });
+        });
+    </script>
     @yield('js')
     <!--end::Custom Javascript-->
     <!--end::Javascript-->
