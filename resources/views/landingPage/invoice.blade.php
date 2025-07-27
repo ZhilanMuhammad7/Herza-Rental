@@ -111,7 +111,27 @@
                                 window.location.href = "{{ route('landingPage.order') }}";
                             },
                             onPending: function(result) {
-                                alert("Menunggu pembayaran.");
+                                $.ajax({
+                                    url: "{{ url('pesanan') }}/" + id,
+                                    type: "DELETE",
+                                    data: {
+                                        _token: '{{ csrf_token() }}'
+                                    },
+                                    dataType: "JSON",
+                                    success: function(data) {
+                                        if (data.status === true) {
+                                            alert(
+                                                "Kamu menutup pembayaran tanpa menyelesaikan transaksi, Pesanan dibatalkan"
+                                            );
+                                            window.location.href = "/";
+                                        } else {
+                                            Swal.fire("Oops", "Data gagal dihapus!", "error");
+                                        }
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown) {
+                                        alert("Pesanan Gagal");
+                                    }
+                                });
                             },
                             onError: function(result) {
                                 alert("Pembayaran gagal.");
@@ -128,7 +148,7 @@
                                         if (data.status === true) {
                                             alert(
                                                 "Kamu menutup pembayaran tanpa menyelesaikan transaksi, Pesanan dibatalkan"
-                                                );
+                                            );
                                             window.location.href = "/";
                                         } else {
                                             Swal.fire("Oops", "Data gagal dihapus!", "error");
@@ -138,7 +158,6 @@
                                         alert("Pesanan Gagal");
                                     }
                                 });
-
                             }
                         });
                     });
