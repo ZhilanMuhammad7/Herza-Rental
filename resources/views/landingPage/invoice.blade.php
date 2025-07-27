@@ -101,6 +101,7 @@
                 <script>
                     let paymentStarted = false;
                     let timeout;
+                    let id = {{ $pesanan->id }}
 
                     document.getElementById('pay-button')?.addEventListener('click', function() {
                         paymentStarted = true;
