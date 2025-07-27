@@ -101,42 +101,46 @@
                 <script>
                     let paymentStarted = false;
                     let timeout;
-                    let id = {{ $pesanan->id }}
 
-                    snap.pay('{{ $snapToken }}', {
-                        onSuccess: function(result) {
-                            alert("Pembayaran berhasil!");
-                            window.location.href = "{{ route('landingPage.order') }}";
-                        },
-                        onPending: function(result) {
-                            alert("Menunggu pembayaran.");
-                        },
-                        onError: function(result) {
-                            alert("Pembayaran gagal.");
-                        },
-                        onClose: function() {
-                            $.ajax({
-                                url: "{{ url('pesanan') }}/" + id,
-                                type: "DELETE",
-                                data: {
-                                    _token: '{{ csrf_token() }}'
-                                },
-                                dataType: "JSON",
-                                success: function(data) {
-                                    if (data.status === true) {
-                                        alert(
-                                            "Kamu menutup pembayaran tanpa menyelesaikan transaksi, Pesanan dibatalkan");
-                                        window.location.href = "/";
-                                    } else {
-                                        Swal.fire("Oops", "Data gagal dihapus!", "error");
+                    document.getElementById('pay-button')?.addEventListener('click', function() {
+                        paymentStarted = true;
+
+                        snap.pay('{{ $snapToken }}', {
+                            onSuccess: function(result) {
+                                alert("Pembayaran berhasil!");
+                                window.location.href = "{{ route('landingPage.order') }}";
+                            },
+                            onPending: function(result) {
+                                alert("Menunggu pembayaran.");
+                            },
+                            onError: function(result) {
+                                alert("Pembayaran gagal.");
+                            },
+                            onClose: function() {
+                                $.ajax({
+                                    url: "{{ url('pesanan') }}/" + id,
+                                    type: "DELETE",
+                                    data: {
+                                        _token: '{{ csrf_token() }}'
+                                    },
+                                    dataType: "JSON",
+                                    success: function(data) {
+                                        if (data.status === true) {
+                                            alert(
+                                                "Kamu menutup pembayaran tanpa menyelesaikan transaksi, Pesanan dibatalkan"
+                                                );
+                                            window.location.href = "/";
+                                        } else {
+                                            Swal.fire("Oops", "Data gagal dihapus!", "error");
+                                        }
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown) {
+                                        alert("Pesanan Gagal");
                                     }
-                                },
-                                error: function(jqXHR, textStatus, errorThrown) {
-                                    alert("Pesanan Gagal");
-                                }
-                            });
+                                });
 
-                        }
+                            }
+                        });
                     });
 
                     // Deteksi jika user keluar/tab pindah dan tidak kembali
