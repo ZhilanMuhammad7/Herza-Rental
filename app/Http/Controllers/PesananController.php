@@ -30,12 +30,6 @@ class PesananController extends Controller
     public function store(Request $request)
     {
         $produk = Produk::find($request->produk_id);
-
-        $lastPesanan = Pesanan::orderBy('created_at', 'desc')->first();
-        $newNumber = $lastPesanan && $lastPesanan->no_pesanan
-            ? ((int) str_replace('INV-', '', $lastPesanan->no_pesanan) + 1)
-            : 1;
-        $noPesanan = 'INV-' . str_pad($newNumber, 2, '0', STR_PAD_LEFT);
         $totalHarga = $produk->harga_sewa * $request->jumlah_hari;
 
         $gambar = null;
@@ -48,8 +42,9 @@ class PesananController extends Controller
         $jumlahHari = (int) $request->jumlah_hari;
         $tglSelesai = $tglMulai->copy()->addDays($jumlahHari);
 
+        // Buat dulu pesanan TANPA no_pesanan
         $data = Pesanan::create([
-            'no_pesanan' => $noPesanan,
+            'no_pesanan' => '', // sementara kosong, akan di-update setelah dapat ID
             'user_id' => Auth::id(),
             'produk_id' => $request->produk_id,
             'jumlah_hari' => $jumlahHari,
@@ -65,7 +60,11 @@ class PesananController extends Controller
             'tanggal' => now()
         ]);
 
-        // Tetap proses cicilan jika jenisnya cicilan
+        // Update no_pesanan dengan format INV-[id]
+        $data->no_pesanan = 'INV-' . $data->id;
+        $data->save();
+
+        // Proses cicilan jika jenisnya cicilan
         if ($request->jenis_pembayaran == 'cicilan') {
             $jumlahCicilan = 2;
             $nominalCicilan = $totalHarga / $jumlahCicilan;
@@ -79,16 +78,15 @@ class PesananController extends Controller
                 ]);
             }
 
-            // Tampilkan invoice biasa
             $pesanan = Pesanan::with('produk')->find($data->id);
             return view('landingPage.invoice', compact('pesanan'))->with('success', 'Pesanan Berhasil Dikirim!');
         }
 
-        // Jika pakai Midtrans
+        // Proses via Midtrans
         if ($request->jenis_pembayaran == 'Via Midtrans') {
             $user = Auth::user();
             $orderId = $data->no_pesanan;
-            // Konfigurasi Snap Token Midtrans
+
             $params = [
                 'transaction_details' => [
                     'order_id' => $orderId,
