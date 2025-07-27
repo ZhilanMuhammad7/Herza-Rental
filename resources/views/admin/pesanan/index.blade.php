@@ -116,7 +116,7 @@
         }).then(function(result) {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "{{ url('produk') }}/" + id,
+                    url: "{{ url('pesanan') }}/" + id,
                     type: "DELETE",
                     data: {
                         _token: '{{ csrf_token() }}'
